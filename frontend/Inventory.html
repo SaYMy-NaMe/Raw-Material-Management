@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title id="survey">Survey Form</title>
+</head>
+<body>
+    <h1 id="title">free Code Camp Survey Form</h1>
+    <p id="description">Fill up the Fucking Form Bro!</p>
+    <form id="survey-form">
+        <div class="text-input">
+        <label for="name-label" id="name-label">Name: <br><input type="text" id="name" placeholder="Enter your name" required/></label> <br>
+        </div>
+        <div class="text-input">
+             <label for="email-label" id="email-label">Email: <br><input type="email" id="email" placeholder="Enter your email" required/></label><br>
+        </div>
+        <div class="text-input">
+         <label for="number-label" id="number-label">Age (Optional): <br><input type="number" id="number" placeholder="Enter your number" min="1" max="10000"/></label><br>
+        </div>
+        <div class="text-input">
+        <label for="selection">Choose one <br>
+        <select id="dropdown">
+            <option>(Select one)</option>
+            <option>Hossain</option>
+            <option>Ashraf</option>
+        </select>
+        </label>
+        </div>
+         <hr>
+
+        <label for="radio">Choose whom you love?<br>
+        <div class="radio">
+        <input type="radio" name="radio" value="Hossain"/><label>Hossain</label><br>
+        <input type="radio" name="radio" value="Ashraf"/><label>Ashraf</label><br>
+        <input type="radio" name="radio" value="Asif"/><label>Asif</label>
+        </div>
+        </label>
+
+        <hr>
+
+        <label for="checkbox">Choose whom you wanna destroy?<br>
+        <div class="checkbox">
+        <input type="checkbox" name="checkbox" value="Saiful"/><label>Saiful</label><br>
+        <input type="checkbox" name="checkbox" value="Upom"/><label>Upom</label><br>
+        <input type="checkbox" name="checkbox" value="Lily"/><label>Lily</label>
+        </div>
+        </label>
+        <hr>
+
+        <label for="comment">Comment here<br>
+        <div class="comment">
+        <textarea id="comment" name="comment" placeholder="Enter your comment here..."></textarea><br>
+        </div>
+        </label>
+
+        <input type="submit" id="submit"/>
+    </form>
+</body>
+</html>
