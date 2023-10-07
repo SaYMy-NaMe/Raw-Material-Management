@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/src/styles/login.css" />
+</head>
+<body>
+    <h1 id="title">Unlock the full experience! Log in to your account to get started.</h1>
+    <p id="description">Let's jazz up this form!</p>
+    <form id="survey-form">
+        <div class="text-input">
+        <label for="name-label" id="name-label">Name: <br><input type="text" id="name" placeholder="Enter your name" required/></label> <br>
+        </div>
+        <div class="text-input">
+             <label for="email-label" id="email-label">Email: <br><input type="email" id="email" placeholder="Enter your email" required/></label><br>
+        </div>
+        <div class="text-input">
+         <label for="number-label" id="number-label">Contact: <br><input type="number" id="number" placeholder="Enter your Contact" max="11"/></label><br>
+        </div>
+        <div class="text-input">
+        <label for="selection">Choose one <br>
+        <select id="dropdown">
+            <option>(Select one)</option>
+            <option>SuperAdmin</option>
+            <option>Admin</option>
+            <option>Supplier</option>
+            <option>ShopKeeper</option>
+        </select>
+        </label>
+        </div>
+         <hr>
+        <input type="submit" id="submit"/>
+    </form>
+</body>
+</html>
