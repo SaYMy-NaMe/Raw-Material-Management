@@ -42,15 +42,18 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   color: var(--second-color);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 header {
     background-color: #333;
     color: white;
     padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 header h1 {
@@ -84,7 +87,9 @@ nav li {
     background-color: #3498db; /* Blue background */
     color: white;
 }
-
+.wrapper {
+  flex: 1;
+}
 .main-section h1 {
     font-size: 36px;
 }
@@ -96,6 +101,9 @@ nav li {
   text-align: center;
   font-weight: var(--font-semi);
   padding: 2rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 .footer__social {
   margin-bottom: var(--mb-4);
