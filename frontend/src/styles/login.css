@@ -42,7 +42,7 @@ body{
     padding-top: 5px;
     padding-bottom: 5px; 
 }
-#submit{
+#superadmin, #admin, #shopkeeper, #supplier{
     background: #37af65;
     color: white;
     border: 0;

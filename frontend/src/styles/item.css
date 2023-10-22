@@ -100,3 +100,44 @@ select {
 .text-input{
     padding-top: 15px; 
 }
+.item-list {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+}
+
+.field {
+    margin: 5px 0;
+}
+
+.delete-button,
+.edit-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #3498db;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+    background-color: #c0392b;
+}
