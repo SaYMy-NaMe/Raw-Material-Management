@@ -69,10 +69,12 @@ main {
 }
 
 .edit-button {
-    background-color: #3498db;
+    background-color: #37af65;
 }
 
-.delete-button:hover,
-.edit-button:hover {
+.delete-button:hover{
     background-color: #c0392b;
+}
+.edit-button:hover{
+   background-color: #FFA500;
 }
