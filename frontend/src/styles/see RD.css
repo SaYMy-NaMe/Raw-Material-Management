@@ -48,19 +48,3 @@ th {
 main{
   padding-top: 20px;
 }
-
-#edit{
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-#edit:hover {
-  background-color: #e74c3c;
-}
