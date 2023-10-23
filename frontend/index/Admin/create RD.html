@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/src/styles/item.css" />
+    <link rel="stylesheet" href="/frontend/src/styles/create-RD.css" />
 </head>
 <body>
 <header id="header">
     <ul id="header-navigation">
             <li><a href="">Add Item</a></li>
+            <li><a href="">Create Requisition</a></li>
             <li><a href="">Inventory Check</a></li>
             <li><a href="">See Requisition Details</a></li>
             <li><a href="">See Order</a></li>
             <li><a href="">See Receipt</a></li>
             <li><a href="">See Item</a></li>
-            <li><a href="">See Priced Bill</a></li>
-            <li><a href="">Create Tender</a></li>
     </ul>
 </header>
-<div id="add-item">
-    <h1 id="title">Add Item</h1> 
+<div id="create-RD">
+    <h1 id="title">Create Requisition details</h1>
     <p id="description">Let's jazz up this form!</p>
     <form id="survey-form">
+        <label for="selection">Choose Item <br>
+        <select id="dropdown">
+            <option>(Select One)</option>
+            <option>Rod</option>
+            <option>Cement</option>
+        </select>
+        </label>
         <div class="text-input">
-        <label for="name-label" id="name-label">Name: <br><input type="text" id="name" placeholder="Enter Item Name" required/></label> <br>
+         <label for="number-label" id="number-label">Quantity: <br><input type="number" id="number" placeholder="How much do you need?"/></label><br>
         </div>
         <div class="text-input">
-         <label for="number-label" id="number-label">Price: <br><input type="number" id="number" placeholder="Enter Price: (per unit)"/></label><br>
+        <label for="name-label" id="name-label">Purpose: <br><input type="text" id="name" placeholder="Purpose" required/></label> <br>
         </div>
-         <br>
-        <button type="submit" id="submit">Submit</button>
+         <br> 
+        <input type="submit" id="submit"/> 
     </form>
 </div>
 </body>
