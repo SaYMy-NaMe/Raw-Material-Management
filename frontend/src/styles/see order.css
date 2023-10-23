@@ -48,14 +48,3 @@ th {
 main{
   padding-top: 20px;
 }
-.edit-button:hover{
-   background-color: #FFA500;
-}
-.edit-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
