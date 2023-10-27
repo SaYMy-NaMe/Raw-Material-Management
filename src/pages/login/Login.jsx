@@ -1,40 +1,48 @@
+import toast from "react-hot-toast";
+import InputField from "../../components/InputField";
 import "./login.css";
+import { NavLink } from "react-router-dom";
+
 const Login = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const signupData = {
+      ex_email: e.target.ex_email.value,
+      ex_password: e.target.ex_password.value,
+    };
+    console.log(signupData);
+
+    toast.success("You have logged in successfully");
+  };
   return (
     <div id="login">
-      <h1 className="auth-title">
-        Unlock the full experience! Log in to your account to get started.
-      </h1>
-      <p id="auth-description">Let's jazz up this form!</p>
-      <form className="login-form">
-        <div className="email-input">
-          <label htmlFor="email-label" id="email-label">
-            Email: <br />
-            <input
-              type="email"
-              id="login-email"
-              placeholder="Enter your email"
-            />
-          </label>
-          <br />
-        </div>
-        <div className="password-input">
-          <label htmlFor="password-label" id="password-label">
-            Password: <br />
-            <input
-              type="password"
-              id="login-password"
-              placeholder="Enter your password"
-            />
-          </label>
-        </div>
-        <br />
-        <button type="submit" id="login-submit">
-          Login
+      <form action="submit" onSubmit={handleSubmit}>
+        <InputField
+          type="email"
+          name="ex_email"
+          fieldName="Email"
+          placeholder="Enter your email"
+        />
+
+        <InputField
+          type="password"
+          name="ex_password"
+          fieldName="Password"
+          placeholder="Enter your password"
+        />
+
+        <p>
+          Don&apos;t have any account?{" "}
+          <NavLink to="/signup" className="linkText">
+            Sign Up
+          </NavLink>
+        </p>
+        <button className="authButton" type="submit">
+          Sign In
         </button>
       </form>
     </div>
   );
 };
-
 export default Login;
