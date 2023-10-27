@@ -7,11 +7,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const signupData = {
+    const loginData = {
       ex_email: e.target.ex_email.value,
       ex_password: e.target.ex_password.value,
     };
-    console.log(signupData);
+    console.log(loginData);
 
     toast.success("You have logged in successfully");
   };
