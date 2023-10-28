@@ -1,9 +1,10 @@
 import toast from "react-hot-toast";
 import InputField from "../../components/InputField";
 import "./login.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -11,9 +12,27 @@ const Login = () => {
       ex_email: e.target.ex_email.value,
       ex_password: e.target.ex_password.value,
     };
-    console.log(loginData);
-
-    toast.success("You have logged in successfully");
+    // Make a POST request to the login API
+    fetch("https://icsrmms.vercel.app/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "User Login Successfull") {
+          toast.success("You've logged in successfully");
+          navigate("/");
+        } else {
+          toast.error(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred during Sign in. Please try again.");
+      });
   };
   return (
     <div id="login">
