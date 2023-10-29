@@ -55,6 +55,8 @@ const Signup = () => {
 
   return (
     <div id="signup">
+      <h1>Sign up</h1>
+      <p>Enter details to create your account!</p>
       <form action="submit" onSubmit={handleSubmit}>
         <InputField
           type="text"

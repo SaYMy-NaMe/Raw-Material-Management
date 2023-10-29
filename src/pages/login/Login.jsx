@@ -36,6 +36,7 @@ const Login = () => {
   };
   return (
     <div id="login">
+      <h1>Please Login Here...</h1>
       <form action="submit" onSubmit={handleSubmit}>
         <InputField
           type="email"
@@ -50,16 +51,18 @@ const Login = () => {
           fieldName="Password"
           placeholder="Enter your password"
         />
-
+        <NavLink to="/forgot-password" className="linkText">
+          Forgot Password?
+        </NavLink>
+        <button className="authButton" type="submit">
+          Sign In
+        </button>
         <p>
           Don&apos;t have any account?{" "}
           <NavLink to="/signup" className="linkText">
             Sign Up
-          </NavLink>{" "}
+          </NavLink>
         </p>
-        <button className="authButton" type="submit">
-          Sign In
-        </button>
       </form>
     </div>
   );
