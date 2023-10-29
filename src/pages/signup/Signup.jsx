@@ -31,7 +31,7 @@ const Signup = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.message === "SuccessFully Registered With Us") {
+        if (data.message === "Successfully Registered With Us") {
           setLoading(false);
           toast.success("A mail has been sent");
           navigate("/signin");
