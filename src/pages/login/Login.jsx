@@ -55,7 +55,7 @@ const Login = () => {
           Don&apos;t have any account?{" "}
           <NavLink to="/signup" className="linkText">
             Sign Up
-          </NavLink>
+          </NavLink>{" "}
         </p>
         <button className="authButton" type="submit">
           Sign In
