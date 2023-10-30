@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
+import { removeStorageData } from "../utils/localStorage";
+import LogoutIcon from "../assets/svgs/LogoutIcon";
 
 // eslint-disable-next-line react/prop-types
-const Header = ({ userData }) => {
-  console.log(userData);
+const Header = ({ userData, setUser }) => {
+  const handleLogout = () => {
+    setUser();
+    removeStorageData("user");
+    removeStorageData("token");
+  };
   return (
     <header id="header">
       <NavLink to="/" id="header-title">
@@ -12,7 +18,10 @@ const Header = ({ userData }) => {
       <ul id="header-navigation">
         <li>
           {userData?.ex_name ? (
-            <button>Log Out</button>
+            <button id="logout-button" onClick={handleLogout}>
+              <LogoutIcon />
+              Log Out
+            </button>
           ) : (
             <NavLink to="/signin">Login</NavLink>
           )}

@@ -7,24 +7,15 @@ import Header from "./components/Header";
 import ForgotPassword from "./pages/forgot-pass/ForgotPassword";
 import ChangePassword from "./pages/change-password/ChangePassword";
 import { useEffect, useState } from "react";
-import { getStoredData, setStoredData } from "./utils/localStorage";
+import { getStoredData } from "./utils/localStorage";
 
 const App = () => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    if (user) {
-      console.log(user);
-      setStoredData("token", user.token);
-      setStoredData("user", {
-        ex_name: user.ex_name,
-        ex_email: user.ex_email,
-        role_name: user.role_name,
-      });
-    } else {
+    if (!user) {
       const accessToken = getStoredData("token");
       const userData = getStoredData("user");
-      console.log(user);
       setUser({
         token: accessToken,
         ex_name: userData?.ex_name,
@@ -36,13 +27,16 @@ const App = () => {
 
   return (
     <>
-      <Header userData={user} />
+      <Header userData={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Login setUser={setUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+        <Route
+          path="/change-password"
+          element={<ChangePassword userData={user} />}
+        />
       </Routes>
       <Toaster />
     </>

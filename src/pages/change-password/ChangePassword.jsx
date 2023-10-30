@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import { toast } from "react-hot-toast";
 import InputField from "../../components/InputField";
 import "./changePassword.css";
 import { useNavigate } from "react-router-dom";
 
-const ChangePassword = () => {
+const ChangePassword = ({ userData }) => {
   const navigate = useNavigate();
-  const accessToken = "";
   const handleSubmit = async (e) => {
     e.preventDefault();
     const changePasswordData = {
@@ -16,7 +16,7 @@ const ChangePassword = () => {
     fetch("https://icsrmms.vercel.app/changePassword", {
       method: "POST",
       headers: {
-        Authorization: `${accessToken}`,
+        Authorization: `${userData?.token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(changePasswordData),
