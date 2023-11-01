@@ -1,0 +1,24 @@
+#addItem {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#addItem form {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e4e4e4;
+  width: 100%;
+  max-width: 337px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  color: #808191;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}

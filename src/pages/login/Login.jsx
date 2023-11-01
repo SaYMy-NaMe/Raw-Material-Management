@@ -31,7 +31,7 @@ const Login = ({ setUser }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.message === "User Login Successfull") {
+        if (data.message === "User Login Successful") {
           setLoading(false);
           toast.success("You've logged in successfully");
 

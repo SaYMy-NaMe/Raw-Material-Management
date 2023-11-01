@@ -23,7 +23,7 @@ const ChangePassword = ({ userData }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.message === "password Updated successfully") {
+        if (data.message === "Password updated successfully") {
           toast.success("Your password has been updated!");
           navigate("/");
         } else {
