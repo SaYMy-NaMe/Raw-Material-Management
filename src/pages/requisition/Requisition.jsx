@@ -6,8 +6,8 @@ const Requisition = () => {
     e.preventDefault();
 
     const createRequisitionData = {
-      projectName: e.target.projectName.value,
-      address: e.target.address.value,
+      project_name: e.target.project_name.value,
+      location: e.target.location.value,
       quantity: e.target.quantity.value,
       purpose: e.target.purpose.value,
     };
@@ -21,13 +21,13 @@ const Requisition = () => {
         <form action="submit">
           <InputField
             type="text"
-            name="projectName"
+            name="project_name"
             fieldName="Project Name"
             placeholder="Project Name"
           />
           <InputField
             type="text"
-            name="address"
+            name="location"
             fieldName="Address"
             placeholder="Address"
           />

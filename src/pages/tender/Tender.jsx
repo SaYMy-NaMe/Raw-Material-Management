@@ -2,12 +2,20 @@ import { NavLink } from "react-router-dom";
 import InputField from "../../components/InputField";
 import "./Tender.css";
 const Tender = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const createTenderData = {
+      deadline: e.target.deadline.value,
+    };
+    console.log(createTenderData);
+  };
   return (
     <div id="Tender">
       <div id="createTender">
         <h1>Tender</h1>
         <p>Create your tender here...</p>
-        <form action="submit">
+        <form action="submit" onSubmit={handleSubmit}>
           <InputField
             type="date"
             name="deadline"
