@@ -28,8 +28,8 @@ const Requisition = () => {
           <InputField
             type="text"
             name="location"
-            fieldName="Address"
-            placeholder="Address"
+            fieldName="Location"
+            placeholder="Enter the location"
           />
           <InputField
             type="number"

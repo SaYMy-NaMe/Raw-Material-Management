@@ -19,7 +19,7 @@ const Items = () => {
           <InputField
             type="text"
             name="item_name"
-            fieldName="ItemName"
+            fieldName="Item Name"
             placeholder="Enter Item Name"
           />
           <button className="authButton" type="submit">
