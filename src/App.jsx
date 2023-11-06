@@ -8,7 +8,10 @@ import ForgotPassword from "./pages/forgot-pass/ForgotPassword";
 import ChangePassword from "./pages/change-password/ChangePassword";
 import { useEffect, useState } from "react";
 import { getStoredData } from "./utils/localStorage";
-import AddItem from "./pages/add-item/AddItem";
+import Items from "./pages/items/Items";
+import Requisition from "./pages/requisition/Requisition";
+import Tender from "./pages/tender/Tender";
+import PricedBill from "./pages/pricedBill/PricedBill";
 
 const App = () => {
   const [user, setUser] = useState();
@@ -30,8 +33,8 @@ const App = () => {
     <>
       <Header userData={user} setUser={setUser} />
       <Routes>
-        {/* <Route path="/" element={<AddItem />} /> */}
         <Route path="/" element={<Landing />} />
+        <Route path="/items" element={<Items />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Login setUser={setUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -39,6 +42,9 @@ const App = () => {
           path="/change-password"
           element={<ChangePassword userData={user} />}
         />
+        <Route path="/requisition" element={<Requisition />} />
+        <Route path="/tender" element={<Tender />} />
+        <Route path="/pricedBill" element={<PricedBill />} />
       </Routes>
       <Toaster />
     </>

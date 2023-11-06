@@ -17,6 +17,9 @@ const Header = ({ userData, setUser }) => {
       </NavLink>
       <ul id="header-navigation">
         <li>
+          <NavLink to="/items">Items</NavLink>
+        </li>
+        <li>
           {userData?.ex_name ? (
             <button id="logout-button" onClick={handleLogout}>
               <LogoutIcon />
