@@ -7,7 +7,7 @@ const Items = () => {
     e.preventDefault();
 
     const addItemData = {
-      itemName: e.target.itemName.value,
+      item_name: e.target.item_name.value,
     };
     console.log(addItemData);
   };
@@ -18,7 +18,7 @@ const Items = () => {
         <form action="submit">
           <InputField
             type="text"
-            name="itemName"
+            name="item_name"
             fieldName="ItemName"
             placeholder="Enter Item Name"
           />

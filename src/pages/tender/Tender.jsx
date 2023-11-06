@@ -9,28 +9,10 @@ const Tender = () => {
         <p>Create your tender here...</p>
         <form action="submit">
           <InputField
-            type="text"
-            name="projectName"
-            fieldName="Project Name"
-            placeholder="Project Name"
-          />
-          <InputField
-            type="text"
-            name="address"
-            fieldName="Address"
-            placeholder="Address"
-          />
-          <InputField
-            type="number"
-            name="quantity"
-            fieldName="Quantity"
-            placeholder="Quantity"
-          />
-          <InputField
-            type="text"
-            name="purpose"
-            fieldName="Purpose"
-            placeholder="Purpose"
+            type="date"
+            name="deadline"
+            fieldName="Deadline"
+            placeholder="Deadline"
           />
           <button className="authButton" type="submit">
             Submit
