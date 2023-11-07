@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import InputField from "../../components/InputField";
-import "./Tender.css";
+import "./tender.css";
 const Tender = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
