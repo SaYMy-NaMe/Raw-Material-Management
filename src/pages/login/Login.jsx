@@ -37,7 +37,6 @@ const Login = ({ setUser }) => {
 
           if (data.token) {
             setStoredData("token", data.token);
-
             fetch("https://icsrmms.vercel.app/seeProfile", {
               method: "GET",
               headers: {
