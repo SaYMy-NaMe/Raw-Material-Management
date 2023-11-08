@@ -1,65 +1,66 @@
 import { NavLink } from "react-router-dom";
-import InputField from "../../components/InputField";
 import "./tender.css";
+import { useEffect, useState } from "react";
+import { baseUrl } from "../../utils/baseUrl";
+import { getStoredData } from "../../utils/localStorage";
+// import CreateTender from "../../components/CreateTender";
 const Tender = () => {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const createTenderData = {
-      deadline: e.target.deadline.value,
-    };
-    console.log(createTenderData);
-  };
+  const [tenders, setTenders] = useState();
+  useEffect(() => {
+    fetch(`${baseUrl}/tender/getAllTender`, {
+      headers: {
+        Authorization: `${getStoredData("token")}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTenders(data.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred during see Item. Please try again.");
+      });
+  }, []);
   return (
     <div id="Tender">
-      <div id="createTender">
-        <h1>Tender</h1>
-        <p>Create your tender here...</p>
-        <form action="submit" onSubmit={handleSubmit}>
-          <InputField
-            type="date"
-            name="deadline"
-            fieldName="Deadline"
-            placeholder="Deadline"
-          />
-          <button className="authButton" type="submit">
-            Submit
-          </button>
-        </form>
-      </div>
+   {/* <CreateTender /> */}
       <div id="seeTender">
         <table>
+        <thead>
           <tr>
             <th>Tender Id</th>
             <th>Creator</th>
             <th>Project Name</th>
             <th>Address</th>
             <th>Item Id</th>
-            <th>Item Name</th>
+            {/* <th>Item Name</th> */}
             <th>Quantity</th>
             <th>Deadline</th>
             <th>Actions</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>SuperAdmin</td>
-            <td>IICT</td>
-            <td>SUST</td>
-            <td>1</td>
-            <td>Balu</td>
-            <td>20KG</td>
-            <td>20/10/23</td>
-            <td>
-              <div className="button-container">
-                <button className="delete-button">Delete</button>
-                <NavLink to="/pricedBill" className="linkText">
-                  <button className="pricedBill-button">
-                    Create PricedBill
-                  </button>
-                </NavLink>
-              </div>
-            </td>
-          </tr>
+          </thead>
+          <tbody>
+          {tenders?.map((tender) => (
+              <tr key={tender?.id}>
+                <td>{tender?.id}</td>
+                <td>{tender?.user?.ex_name}</td>
+                <td>{tender?.requisition?.project_name}</td>
+                <td>{tender?.requisition?.location}</td>
+                <td>{tender?.requisition?.item_id}</td>
+                <td>{tender?.requisition?.quantity}</td>
+                <td>{tender?.deadline}</td>
+                <td>
+                  <div className="button-container">
+                    <button className="delete-button">Delete</button>
+                    <NavLink to="/pricedBill" className="linkText">
+                      <button className="pricedBill-button">Create PriceBill</button>
+                    </NavLink>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

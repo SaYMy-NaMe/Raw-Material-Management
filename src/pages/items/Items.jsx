@@ -20,7 +20,7 @@ const Items = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("An error occurred during add Item. Please try again.");
+        alert("An error occurred during see Item. Please try again.");
       });
   }, []);
   return (
