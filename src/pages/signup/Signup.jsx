@@ -4,6 +4,7 @@ import "./signup.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+import { baseUrl } from "../../utils/baseUrl";
 
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const Signup = () => {
     };
 
     // Make a POST request to the signup API
-    fetch("https://icsrmms.vercel.app/auth/signup", {
+    fetch(`${baseUrl}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

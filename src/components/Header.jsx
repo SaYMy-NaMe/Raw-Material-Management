@@ -2,9 +2,13 @@
 import { NavLink } from "react-router-dom";
 import { removeStorageData } from "../utils/localStorage";
 import LogoutIcon from "../assets/svgs/LogoutIcon";
+import { AuthContext } from "../contexts/authContext";
+import { useContext } from "react";
 
 // eslint-disable-next-line react/prop-types
-const Header = ({ userData, setUser }) => {
+const Header = () => {
+  const { user: userData, setUser } = useContext(AuthContext);
+
   const handleLogout = () => {
     setUser();
     removeStorageData("user");
@@ -16,25 +20,24 @@ const Header = ({ userData, setUser }) => {
         Raw material management
       </NavLink>
       <ul id="header-navigation">
-        <li>
-          <NavLink to="/items">Items</NavLink>
-        </li>
-        <li>
-          {userData?.ex_name ? (
-            <button id="logout-button" onClick={handleLogout}>
-              <LogoutIcon />
-              Log Out
-            </button>
-          ) : (
-            <NavLink to="/signin">Login</NavLink>
-          )}
-        </li>
-        <li>
-          <NavLink to="/change-password">Change Password</NavLink>
-        </li>
-        {userData?.ex_name && (
+        {userData?.token ? (
+          <>
+            <li>
+              <NavLink to="/items">Items</NavLink>
+            </li>
+            <li>
+              <NavLink to="/change-password">Change Password</NavLink>
+            </li>
+            <li>
+              <button id="logout-button" onClick={handleLogout}>
+                <LogoutIcon />
+                Log Out
+              </button>
+            </li>
+          </>
+        ) : (
           <li>
-            <p>{userData?.ex_name}</p>
+            <NavLink to="/signin">Login</NavLink>
           </li>
         )}
       </ul>

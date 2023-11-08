@@ -4,10 +4,11 @@ import "./items.css";
 import CreateItem from "../../components/CreateItem";
 import { useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
+import { baseUrl } from "../../utils/baseUrl";
 const Items = () => {
   const [items, setItems] = useState();
   useEffect(() => {
-    fetch("https://icsrmms.vercel.app/item/getItem", {
+    fetch(`${baseUrl}/item/getItem`, {
       headers: {
         Authorization: `${getStoredData("token")}`,
         "Content-Type": "application/json",

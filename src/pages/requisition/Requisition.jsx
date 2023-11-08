@@ -3,10 +3,11 @@ import "./requisition.css";
 // import CreateRequisition from "../../components/CreateRequisition";
 import { useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
+import { baseUrl } from "../../utils/baseUrl";
 const Requisition = () => {
   const [requisitions, setRequisitions] = useState();
   useEffect(() => {
-    fetch("https://icsrmms.vercel.app/requisition/getAllRequisition", {
+    fetch(`${baseUrl}/requisition/getAllRequisition`, {
       headers: {
         Authorization: `${getStoredData("token")}`,
         "Content-Type": "application/json",

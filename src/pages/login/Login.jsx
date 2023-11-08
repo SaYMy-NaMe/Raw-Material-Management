@@ -4,9 +4,13 @@ import InputField from "../../components/InputField";
 import "./login.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setStoredData } from "../../utils/localStorage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { baseUrl } from "../../utils/baseUrl";
+import { AuthContext } from "../../contexts/authContext";
 
-const Login = ({ setUser }) => {
+const Login = () => {
+  const { setUser } = useContext(AuthContext);
+
   const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -20,7 +24,7 @@ const Login = ({ setUser }) => {
     };
 
     // Make a POST request to the login API
-    fetch("https://icsrmms.vercel.app/auth/login", {
+    fetch(`${baseUrl}/auth/login`, {
       method: "POST",
 
       headers: {
@@ -37,7 +41,7 @@ const Login = ({ setUser }) => {
 
           if (data.token) {
             setStoredData("token", data.token);
-            fetch("https://icsrmms.vercel.app/seeProfile", {
+            fetch(`${baseUrl}/seeProfile`, {
               method: "GET",
               headers: {
                 Authorization: `${data.token}`,

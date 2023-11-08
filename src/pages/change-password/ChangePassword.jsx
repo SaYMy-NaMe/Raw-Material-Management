@@ -3,8 +3,13 @@ import { toast } from "react-hot-toast";
 import InputField from "../../components/InputField";
 import "./changePassword.css";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../utils/baseUrl";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/authContext";
 
-const ChangePassword = ({ userData }) => {
+const ChangePassword = () => {
+  const { user: userData } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +18,7 @@ const ChangePassword = ({ userData }) => {
       newPassword: e.target.newPassword.value,
     };
     // Make a POST request to the change Password API
-    fetch("https://icsrmms.vercel.app/changePassword", {
+    fetch(`${baseUrl}/changePassword`, {
       method: "POST",
       headers: {
         Authorization: `${userData?.token}`,

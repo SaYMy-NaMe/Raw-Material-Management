@@ -1,5 +1,5 @@
 #createTender {
-  height: 80vh;
+  margin: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;

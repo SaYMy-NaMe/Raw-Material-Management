@@ -3,6 +3,7 @@ import InputField from "../../components/InputField";
 import "./forgotPassword.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { baseUrl } from "../../utils/baseUrl";
 
 const ForgotPassword = () => {
   const [isLoading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ const ForgotPassword = () => {
       ex_email: e.target.ex_email.value,
     };
     // Make a POST request to the Forgot Password API
-    fetch("https://icsrmms.vercel.app/forgotPassword", {
+    fetch(`${baseUrl}/forgotPassword`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

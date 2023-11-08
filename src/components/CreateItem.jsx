@@ -1,3 +1,4 @@
+import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 
@@ -7,7 +8,7 @@ const CreateItem = () => {
     const addItemData = {
       item_name: e.target.item_name.value,
     };
-    fetch("https://icsrmms.vercel.app/item/addItem", {
+    fetch(`${baseUrl}/item/addItem`, {
       method: "POST",
       headers: {
         Authorization: `${getStoredData("token")}`,
