@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./requisition.css";
-// import CreateRequisition from "../../components/CreateRequisition";
+import CreateRequisition from "../../components/CreateRequisition";
 import { useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
 import { baseUrl } from "../../utils/baseUrl";
@@ -27,7 +27,7 @@ const Requisition = () => {
 
   return (
     <div id="Requisition">
-      {/* <CreateRequisition /> */}
+      <CreateRequisition />
       <div id="seeRequisition">
         <table>
           <thead>

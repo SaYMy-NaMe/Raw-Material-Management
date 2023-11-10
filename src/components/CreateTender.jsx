@@ -1,4 +1,5 @@
-import InputField from "../../components/InputField";
+import InputField from "./InputField";
+
 const CreateTender = () => {
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const CreateTender = () => {
         <h1>Tender</h1>
         <p>Create your tender here...</p>
         <form action="submit" onSubmit={handleSubmit}>
-          <InputField 
+          <InputField
             type="date"
             name="deadline"
             fieldName="Deadline"

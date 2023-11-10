@@ -48,6 +48,11 @@ const Items = () => {
                         Create Requisition
                       </button>
                     </NavLink>
+                    <NavLink to="/quantityOut" className="linkText">
+                      <button className="quantityOut-button">
+                        Quantity Out
+                      </button>
+                    </NavLink>
                   </div>
                 </td>
               </tr>

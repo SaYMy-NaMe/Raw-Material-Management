@@ -1,4 +1,4 @@
-#createPricedBill {
+#createReceipt {
   margin: 50px;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   gap: 20px;
 }
 
-#createPricedBill form {
+#createReceipt form {
   padding: 20px;
   border-radius: 10px;
   border: 1px solid #e4e4e4;
@@ -23,55 +23,52 @@
   font-weight: 500;
 }
 
-#seePricedBill {
+#seeReceipt {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 100px;
+  padding-top: 40px;
 }
 
-#seePricedBill table {
+#seeReceipt table {
   width: 100%;
   border-collapse: collapse;
-  width: 50%;
+  width: 80%;
 }
 
-#seePricedBill table,
+#seeReceipt table,
 th,
 td {
   border: 1px solid #ccc;
 }
 
-#seePricedBill th,
+#seeReceipt th,
 td {
   padding: 8px;
   text-align: center;
 }
 
-#seePricedBill tr:nth-child(even) {
+#seeReceipt tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#seePricedBill th {
+#seeReceipt th {
   background-color: #333;
   color: white;
 }
 
-#seePricedBill .button-container {
+#seeReceipt .button-container {
   text-align: center;
 }
 
-#seePricedBill .delete-button, #seePricedBill .createReceipt-button{
+#seeReceipt .delete-button {
   padding: 5px 10px;
   margin: 5px;
   cursor: pointer;
 }
 
-#seePricedBill .delete-button {
+#seeReceipt .delete-button {
   background-color: #f44336;
-  color: white;
-}
-#seePricedBill .createReceipt-button {
-   background-color: #ff9800;
   color: white;
 }

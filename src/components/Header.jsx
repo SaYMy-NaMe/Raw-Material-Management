@@ -26,6 +26,24 @@ const Header = () => {
               <NavLink to="/items">Items</NavLink>
             </li>
             <li>
+              <NavLink to="/requisition">Requisition</NavLink>
+            </li>
+            <li>
+              <NavLink to="/tender">Tender</NavLink>
+            </li>
+            <li>
+              <NavLink to="/pricedBill">Priced Bill</NavLink>
+            </li>
+            <li>
+              <NavLink to="/receipt">Receipt</NavLink>
+            </li>
+            <li>
+              <NavLink to="/inventory">Inventory</NavLink>
+            </li>
+            <li>
+              <NavLink to="/report">Report</NavLink>
+            </li>
+            <li>
               <NavLink to="/change-password">Change Password</NavLink>
             </li>
             <li>

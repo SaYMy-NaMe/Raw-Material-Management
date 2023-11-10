@@ -37,6 +37,7 @@ const PricedBill = () => {
             <th>Quantity</th>
             <th>Price</th>
             <th>Total Price</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -45,18 +46,21 @@ const PricedBill = () => {
               <tr key={pricedBill?.id}>
                 <td>{pricedBill?.id}</td>
                 <td>{pricedBill?.user?.ex_name}</td>
-                 <td>{pricedBill?.tender?.requisition?.item?.id}</td>
+                <td>{pricedBill?.tender?.requisition?.item?.id}</td>
                 <td>{pricedBill?.tender?.requisition?.item?.item_name}</td>
                 <td>{pricedBill?.tender?.requisition?.quantity}</td>
                 <td>{pricedBill?.price}</td>
                 <td>{pricedBill?.total_price}</td>
+                <td>{pricedBill?.status}</td>
                 <td>
                   <div className="button-container">
                     <button className="delete-button">Delete</button>
-                    {/* <NavLink to="/pricedBill" className="linkText">
-                      <button className="pricedBill-button">Create PriceBill</button>
-                    </NavLink> */}
                   </div>
+                  <NavLink to="/Receipt" className="linkText">
+                     <div className="button-container">
+                    <button className="createReceipt-button">Create Receipt</button>
+                  </div>
+                  </NavLink>
                 </td>
               </tr>
             ))}

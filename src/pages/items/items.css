@@ -62,7 +62,10 @@ td {
 }
 
 #seeItems .delete-button,
-#seeItems .requisition-button {
+#seeItems .requisition-button, 
+#seeItems .deleteFromInventory-button, 
+#seeItems .createReport-button, 
+#seeItems .quantityOut-button {
   padding: 5px 10px;
   margin: 5px;
   cursor: pointer;
@@ -75,5 +78,17 @@ td {
 
 #seeItems .requisition-button {
   background-color: #ff9800;
+  color: white;
+}
+#seeItems .deleteFromInventory-button {
+  background-color: #24a0ed;
+  color: white;
+}
+#seeItems .createReport-button {
+  background-color: #00FF00;
+  color: white;
+}
+#seeItems .quantityOut-button {
+  background-color: #24a0ed;
   color: white;
 }

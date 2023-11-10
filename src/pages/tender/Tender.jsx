@@ -3,7 +3,7 @@ import "./tender.css";
 import { useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-// import CreateTender from "../../components/CreateTender";
+import CreateTender from "../../components/CreateTender";
 const Tender = () => {
   const [tenders, setTenders] = useState();
   useEffect(() => {
@@ -24,7 +24,7 @@ const Tender = () => {
   }, []);
   return (
     <div id="Tender">
-   {/* <CreateTender /> */}
+   <CreateTender />
       <div id="seeTender">
         <table>
         <thead>
@@ -34,7 +34,7 @@ const Tender = () => {
             <th>Project Name</th>
             <th>Address</th>
             <th>Item Id</th>
-            {/* <th>Item Name</th> */}
+            <th>Item Name</th>
             <th>Quantity</th>
             <th>Deadline</th>
             <th>Actions</th>
@@ -47,7 +47,8 @@ const Tender = () => {
                 <td>{tender?.user?.ex_name}</td>
                 <td>{tender?.requisition?.project_name}</td>
                 <td>{tender?.requisition?.location}</td>
-                <td>{tender?.requisition?.item_id}</td>
+                <td>{tender?.requisition?.item?.id}</td>
+                <td>{tender?.requisition?.item?.item_name}</td>
                 <td>{tender?.requisition?.quantity}</td>
                 <td>{tender?.deadline}</td>
                 <td>

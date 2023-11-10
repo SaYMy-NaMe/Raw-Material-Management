@@ -19,6 +19,7 @@ const CreatePricedBill = () => {
             fieldName="Price"
             placeholder="Enter the Price"
           />
+          {/* Dropdown: Accepted/Rejected/Pending */}
           <button className="authButton" type="submit">
             Submit
           </button>
