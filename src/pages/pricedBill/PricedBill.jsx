@@ -36,7 +36,7 @@ const PricedBill = () => {
         <table>
           <thead>
             <tr>
-              <th>Tender Id</th>
+              <th>PricedBill Id</th>
               <th>Creator</th>
               <th>Item Id</th>
               <th>Item Name</th>

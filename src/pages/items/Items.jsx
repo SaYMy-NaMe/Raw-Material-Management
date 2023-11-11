@@ -8,7 +8,6 @@ import CreateRequisition from "../../components/CreateRequisition";
 import QuantityOut from "../../components/QuantityOut";
 const Items = () => {
   const [items, setItems] = useState();
-  console.log(items);
   useEffect(() => {
     fetch(`${baseUrl}/item/getItem`, {
       headers: {
