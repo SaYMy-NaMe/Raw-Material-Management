@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { removeStorageData } from "../utils/localStorage";
 import LogoutIcon from "../assets/svgs/LogoutIcon";
 import { AuthContext } from "../contexts/authContext";
@@ -8,11 +8,12 @@ import { useContext } from "react";
 // eslint-disable-next-line react/prop-types
 const Header = () => {
   const { user: userData, setUser } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     setUser();
     removeStorageData("user");
     removeStorageData("token");
+    navigate("/");
   };
   return (
     <header id="header">

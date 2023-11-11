@@ -6,8 +6,15 @@ import { getStoredData } from "../../utils/localStorage";
 import { baseUrl } from "../../utils/baseUrl";
 import CreateRequisition from "../../components/CreateRequisition";
 import QuantityOut from "../../components/QuantityOut";
+
 const Items = () => {
   const [items, setItems] = useState();
+
+  const [isCreateRequisition, setIsCreateRequisition] = useState({
+    isON: false,
+    id: "",
+  });
+
   useEffect(() => {
     fetch(`${baseUrl}/item/getItem`, {
       headers: {
@@ -26,10 +33,25 @@ const Items = () => {
         alert("An error occurred during see Item. Please try again.");
       });
   }, []);
+
+  const handleCreateRequisition = (id) => {
+    setIsCreateRequisition();
+    setIsCreateRequisition({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 350, behavior: "smooth" });
+  };
+
   return (
     <div id="items">
       <CreateItem />
-      <CreateRequisition />
+      {isCreateRequisition?.isON && (
+        <CreateRequisition
+          id={isCreateRequisition.id}
+          setIsCreateRequisition={setIsCreateRequisition}
+        />
+      )}
       <QuantityOut />
       <div id="seeItems">
         <table>
@@ -48,11 +70,12 @@ const Items = () => {
                 <td>
                   <div className="button-container">
                     <button className="delete-button">Delete</button>
-                    <NavLink to="/requisition" className="linkText">
-                      <button className="requisition-button">
-                        Create Requisition
-                      </button>
-                    </NavLink>
+                    <button
+                      className="requisition-button"
+                      onClick={() => handleCreateRequisition(item?.id)}
+                    >
+                      Create Requisition
+                    </button>
                     <NavLink to="/quantityOut" className="linkText">
                       <button className="quantityOut-button">
                         Quantity Out

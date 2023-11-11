@@ -18,8 +18,9 @@ const CreateItem = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
+        if (data?.status == "200") {
           console.log(data);
+          //Toaster
         }
       })
       .catch((error) => {
