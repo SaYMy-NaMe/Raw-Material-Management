@@ -3,7 +3,7 @@ import InputField from "./InputField";
 const CreateReport = () => {
     return (
         <div id="createReport" action="submit">
-            <form>
+        <form>
             <InputField
           type="date"
           name="start_date"
@@ -16,7 +16,7 @@ const CreateReport = () => {
           fieldName="endDate"
           placeholder="End Date"
         />
-            </form>
+        </form>
         </div>
     );
 };

@@ -1,15 +1,15 @@
 import InputField from "./InputField";
 
-const QuantityOut = () => {
+const DamagedQuantity = () => {
   return (
-    <div id="quantityOut">
-      <h1>Quantity Out</h1>
+    <div id="damagedQuantity">
+      <h1>Add Damaged Quantity</h1>
       <form action="submit">
         <InputField
           type="number"
-          name="quantity_out"
-          fieldName="Quantity Out"
-          placeholder="Quantity Out"
+          name="damaged_quantity"
+          fieldName="Damaged Quantity"
+          placeholder="Enter Damaged Quantity"
         />
         <button className="authButton" type="submit">
           Submit
@@ -19,4 +19,4 @@ const QuantityOut = () => {
   );
 };
 
-export default QuantityOut;
+export default DamagedQuantity;

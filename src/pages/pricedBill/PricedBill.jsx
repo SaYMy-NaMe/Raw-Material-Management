@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import CreatePricedBill from "../../components/CreatePricedBill";
 import "./pricedBill.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import { NavLink } from "react-router-dom";
+import Status from "../../components/Status";
+import CreateReceipt from "../../components/CreateReceipt";
 
 const PricedBill = () => {
   const [pricedBills, setPricedBill] = useState();
@@ -16,7 +17,9 @@ const PricedBill = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setPricedBill(data.data);
+        if (data?.status == "200") {
+          setPricedBill(data.data);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -25,24 +28,27 @@ const PricedBill = () => {
         );
       });
   }, []);
-  return <div id="PricedBill">
-   <CreatePricedBill />
-   <div id="seePricedBill"><table>
-        <thead>
-          <tr>
-            <th>Tender Id</th>
-            <th>Creator</th>
-            <th>Item Id</th>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
+  return (
+    <div id="PricedBill">
+      <Status />
+      <CreateReceipt />
+      <div id="seePricedBill">
+        <table>
+          <thead>
+            <tr>
+              <th>Tender Id</th>
+              <th>Creator</th>
+              <th>Item Id</th>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody>
-          {pricedBills?.map((pricedBill) => (
+            {pricedBills?.map((pricedBill) => (
               <tr key={pricedBill?.id}>
                 <td>{pricedBill?.id}</td>
                 <td>{pricedBill?.user?.ex_name}</td>
@@ -57,16 +63,20 @@ const PricedBill = () => {
                     <button className="delete-button">Delete</button>
                   </div>
                   <NavLink to="/Receipt" className="linkText">
-                     <div className="button-container">
-                    <button className="createReceipt-button">Create Receipt</button>
-                  </div>
+                    <div className="button-container">
+                      <button className="createReceipt-button">
+                        Create Receipt
+                      </button>
+                    </div>
                   </NavLink>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table></div>
-  </div>;
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default PricedBill;

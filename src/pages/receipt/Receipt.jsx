@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
-import CreateReceipt from "../../components/CreateReceipt";
 import "./receipt.css";
+import DamagedQuantity from "../../components/damagedQuantity";
 const Receipt = () => {
-  return <div id="receipt">
-  <CreateReceipt />
-  <div id="seeReceipt">
-  <table>
+  return (
+    <div id="receipt">
+      <DamagedQuantity />
+      <div id="seeReceipt">
+        <table>
           <thead>
             <tr>
               <th>Receipt Id</th>
@@ -42,8 +43,9 @@ const Receipt = () => {
             ))} */}
           </tbody>
         </table>
-  </div>
-  </div>;
+      </div>
+    </div>
+  );
 };
 
 export default Receipt;

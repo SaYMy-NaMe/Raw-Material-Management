@@ -1,12 +1,14 @@
-/* eslint-disable no-unused-vars */
 import { NavLink } from "react-router-dom";
 import "./items.css";
 import CreateItem from "../../components/CreateItem";
 import { useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
 import { baseUrl } from "../../utils/baseUrl";
+import CreateRequisition from "../../components/CreateRequisition";
+import QuantityOut from "../../components/QuantityOut";
 const Items = () => {
   const [items, setItems] = useState();
+  console.log(items);
   useEffect(() => {
     fetch(`${baseUrl}/item/getItem`, {
       headers: {
@@ -16,7 +18,9 @@ const Items = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setItems(data.data);
+        if (data?.status == "200") {
+          setItems(data.data);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -26,6 +30,8 @@ const Items = () => {
   return (
     <div id="items">
       <CreateItem />
+      <CreateRequisition />
+      <QuantityOut />
       <div id="seeItems">
         <table>
           <thead>
