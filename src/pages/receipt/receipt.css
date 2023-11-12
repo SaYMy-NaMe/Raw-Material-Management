@@ -1,0 +1,76 @@
+#createReceipt,
+#damagedQuantity {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#createReceipt form,
+#damagedQuantity form {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e4e4e4;
+  width: 100%;
+  max-width: 337px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  color: #808191;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+#seeReceipt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  padding-top: 40px;
+}
+
+#seeReceipt table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#seeReceipt table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+
+#seeReceipt th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+#seeReceipt tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#seeReceipt th {
+  background-color: #333;
+  color: white;
+}
+
+#seeReceipt .button-container {
+  text-align: center;
+}
+
+#seeReceipt .delete-button {
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#seeReceipt .delete-button {
+  background-color: #f44336;
+  color: white;
+}
