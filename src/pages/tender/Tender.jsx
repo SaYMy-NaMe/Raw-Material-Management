@@ -1,11 +1,17 @@
-import { NavLink } from "react-router-dom";
 import "./tender.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import CreatePricedBill from "../../components/CreatePricedBill";
+import { AuthContext } from "../../contexts/authContext";
+import { userRole } from "../../utils/enums";
 const Tender = () => {
+  const { user, setUser } = useContext(AuthContext);
   const [tenders, setTenders] = useState();
+  const [isCreatePricedBill, setIsCreatePricedBill] = useState({
+    isON: false,
+    id: "",
+  });
   useEffect(() => {
     fetch(`${baseUrl}/tender/getAllTender`, {
       headers: {
@@ -24,9 +30,23 @@ const Tender = () => {
         alert("An error occurred during see Tenders. Please try again.");
       });
   }, []);
+  const handleCreatePricedBill = (id) => {
+    setIsCreatePricedBill();
+    setIsCreatePricedBill({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 115, behavior: "smooth" });
+  };
+
   return (
     <div id="Tender">
-      <CreatePricedBill />
+      {isCreatePricedBill?.isON && (
+        <CreatePricedBill
+          id={isCreatePricedBill.id}
+          setIsCreatePricedBill={setIsCreatePricedBill}
+        />
+      )}
       <div id="seeTender">
         <table>
           <thead>
@@ -56,12 +76,15 @@ const Tender = () => {
                   <td>{tender?.deadline}</td>
                   <td>
                     <div className="button-container">
-                      <button className="delete-button">Delete</button>
-                      <NavLink to="/pricedBill" className="linkText">
-                        <button className="pricedBill-button">
-                          Create PriceBill
+                      {/* <button className="delete-button">Delete</button> */}
+                      {user?.role_name === userRole.USER && (
+                        <button
+                          className="pricedBill-button"
+                          onClick={() => handleCreatePricedBill(tender?.id)}
+                        >
+                          Create PricedBill
                         </button>
-                      </NavLink>
+                      )}
                     </div>
                   </td>
                 </tr>

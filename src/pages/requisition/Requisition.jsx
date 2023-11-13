@@ -1,11 +1,17 @@
-import { NavLink } from "react-router-dom";
 import "./requisition.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
 import { baseUrl } from "../../utils/baseUrl";
 import CreateTender from "../../components/CreateTender";
+import { AuthContext } from "../../contexts/authContext";
+import { userRole } from "../../utils/enums";
 const Requisition = () => {
+  const { user, setUser } = useContext(AuthContext);
   const [requisitions, setRequisitions] = useState();
+  const [isCreateTender, setIsCreateTender] = useState({
+    isON: false,
+    id: "",
+  });
   useEffect(() => {
     fetch(`${baseUrl}/requisition/getAllRequisition`, {
       headers: {
@@ -27,9 +33,23 @@ const Requisition = () => {
       });
   }, []);
 
+  const handleCreateTender = (id) => {
+    setIsCreateTender();
+    setIsCreateTender({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 150, behavior: "smooth" });
+  };
+
   return (
     <div id="Requisition">
-      <CreateTender />
+      {isCreateTender?.isON && (
+        <CreateTender
+          id={isCreateTender.id}
+          setIsCreateTender={setIsCreateTender}
+        />
+      )}
       <div id="seeRequisition">
         <table>
           <thead>
@@ -57,10 +77,15 @@ const Requisition = () => {
                   <td>{requisition?.purpose}</td>
                   <td>
                     <div className="button-container">
-                      <button className="delete-button">Delete</button>
-                      <NavLink to="/tender" className="linkText">
-                        <button className="tender-button">Create Tender</button>
-                      </NavLink>
+                      {/* <button className="delete-button">Delete</button> */}
+                      {user?.role_name === userRole.SUPERADMIN && (
+                        <button
+                          className="tender-button"
+                          onClick={() => handleCreateTender(requisition?.id)}
+                        >
+                          Create Tender
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

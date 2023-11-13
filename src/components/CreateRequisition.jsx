@@ -1,11 +1,14 @@
+import { useEffect, useState } from "react";
 import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
+import { toast } from "react-hot-toast";
 
 const CreateRequisition = ({ id, setIsCreateRequisition }) => {
+  const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const createRequisitionData = {
       item_id: id,
       project_name: e.target.project_name.value,
@@ -28,7 +31,11 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
             isON: false,
             id: "",
           });
-          //Toaster and Redirection
+          setLoading(false);
+          toast.success("Requisition Created Successfully");
+        } else {
+          setLoading(false);
+          toast.error(data.message);
         }
       })
       .catch((error) => {
@@ -36,6 +43,11 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
         alert("An error occurred during create Requisition. Please try again.");
       });
   };
+  useEffect(() => {
+    if (isLoading) {
+      toast("Loading...");
+    }
+  }, [isLoading]);
   return (
     <div id="createRequisition" onSubmit={handleSubmit}>
       <h1>Requisition</h1>

@@ -72,7 +72,7 @@ const Items = () => {
                 <td>{item?.item_name}</td>
                 <td>
                   <div className="button-container">
-                    <button className="delete-button">Delete</button>
+                    {/* <button className="delete-button">Delete</button> */}
                     {user?.role_name === userRole.ADMIN && (
                       <button
                         className="requisition-button"
