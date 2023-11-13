@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import "./items.css";
 import CreateItem from "../../components/CreateItem";
 import { useContext, useEffect, useState } from "react";
@@ -10,10 +9,14 @@ import { AuthContext } from "../../contexts/authContext";
 import { userRole } from "../../utils/enums";
 
 const Items = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [items, setItems] = useState();
 
   const [isCreateRequisition, setIsCreateRequisition] = useState({
+    isON: false,
+    id: "",
+  });
+  const [isQuantityOut, setIsQuantityOut] = useState({
     isON: false,
     id: "",
   });
@@ -48,21 +51,23 @@ const Items = () => {
 
   return (
     <div id="items">
-      <CreateItem />
+      {user?.role_name === userRole.ADMIN && <CreateItem />}
+
       {isCreateRequisition?.isON && (
         <CreateRequisition
           id={isCreateRequisition.id}
           setIsCreateRequisition={setIsCreateRequisition}
         />
       )}
-      <QuantityOut />
+      {isQuantityOut?.isON && <QuantityOut />}
+
       <div id="seeItems">
         <table>
           <thead>
             <tr>
               <th>Item Id</th>
               <th>Item Name</th>
-              <th>Actions</th>
+              {!user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -70,24 +75,26 @@ const Items = () => {
               <tr key={item?.id}>
                 <td>{item?.id}</td>
                 <td>{item?.item_name}</td>
-                <td>
-                  <div className="button-container">
-                    {/* <button className="delete-button">Delete</button> */}
-                    {user?.role_name === userRole.ADMIN && (
-                      <button
-                        className="requisition-button"
-                        onClick={() => handleCreateRequisition(item?.id)}
-                      >
-                        Create Requisition
-                      </button>
-                    )}
-                    <NavLink to="/quantityOut" className="linkText">
-                      <button className="quantityOut-button">
-                        Quantity Out
-                      </button>
-                    </NavLink>
-                  </div>
-                </td>
+                {!user?.role_name === userRole.SUPERADMIN && (
+                  <td>
+                    <div className="button-container">
+                      {/* <button className="delete-button">Delete</button> */}
+                      {user?.role_name === userRole.ADMIN && (
+                        <button
+                          className="requisition-button"
+                          onClick={() => handleCreateRequisition(item?.id)}
+                        >
+                          Create Requisition
+                        </button>
+                      )}
+                      {user?.role_name === userRole.STOREKEEPER && (
+                        <button className="quantityOut-button">
+                          Quantity Out
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

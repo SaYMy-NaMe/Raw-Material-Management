@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./inventory.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-import { NavLink } from "react-router-dom";
 import CreateReport from "../../components/CreateReport";
+import { AuthContext } from "../../contexts/authContext";
+import { userRole } from "../../utils/enums";
 const Inventory = () => {
+  const { user } = useContext(AuthContext);
   const [inventory, setInventory] = useState();
   useEffect(() => {
     fetch(`${baseUrl}/inventory/getAllInventory`, {
@@ -26,7 +28,7 @@ const Inventory = () => {
   }, []);
   return (
     <div id="inventory">
-      <CreateReport />
+      {user?.role_name === userRole.SUPERADMIN && <CreateReport />}
       <div id="seeInventory">
         <table>
           <thead>
@@ -38,7 +40,7 @@ const Inventory = () => {
               <th>Quantity Out</th>
               <th>Manager Id</th>
               <th>Manager Name</th>
-              <th>Actions</th>
+              {user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -51,16 +53,16 @@ const Inventory = () => {
                 <td>{inventory?.quantity_out}</td>
                 <td>{inventory?.manager?.ex_id}</td>
                 <td>{inventory?.manager?.ex_name}</td>
-                <td>
-                  <div className="button-container">
-                    <button className="delete-button">Delete</button>
-                    <NavLink to="/report" className="linkText">
+                {user?.role_name === userRole.SUPERADMIN && (
+                  <td>
+                    <div className="button-container">
+                      {/* <button className="delete-button">Delete</button> */}
                       <button className="createReport-button">
                         CreateReport
                       </button>
-                    </NavLink>
-                  </div>
-                </td>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

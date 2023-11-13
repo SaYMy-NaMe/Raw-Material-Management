@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./pricedBill.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-import { NavLink } from "react-router-dom";
 import Status from "../../components/Status";
 import CreateReceipt from "../../components/CreateReceipt";
+import { userRole } from "../../utils/enums";
+import { AuthContext } from "../../contexts/authContext";
 
 const PricedBill = () => {
+  const { user } = useContext(AuthContext);
   const [pricedBills, setPricedBill] = useState();
   useEffect(() => {
     fetch(`${baseUrl}/pricedBill/getAllPricedBill`, {
@@ -30,8 +32,8 @@ const PricedBill = () => {
   }, []);
   return (
     <div id="PricedBill">
-      <Status />
-      <CreateReceipt />
+      {user?.role_name === userRole.SUPERADMIN && <Status />}
+      {user?.role_name === userRole.USER && <CreateReceipt />}
       <div id="seePricedBill">
         <table>
           <thead>
@@ -44,7 +46,7 @@ const PricedBill = () => {
               <th>Price</th>
               <th>Total Price</th>
               <th>Status</th>
-              <th>Actions</th>
+              {user?.role_name === userRole.USER && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -58,18 +60,24 @@ const PricedBill = () => {
                 <td>{pricedBill?.price}</td>
                 <td>{pricedBill?.total_price}</td>
                 <td>{pricedBill?.status}</td>
-                <td>
-                  <div className="button-container">
-                    <button className="delete-button">Delete</button>
-                  </div>
-                  <NavLink to="/Receipt" className="linkText">
+                {user?.role_name === userRole.USER && (
+                  <td>
                     <div className="button-container">
-                      <button className="createReceipt-button">
+                      {/* <button className="delete-button">Delete</button> */}
+                    </div>
+
+                    <div className="button-container">
+                      <button
+                        className="createReceipt-button"
+                        disabled={
+                          pricedBill?.status === "ACCEPTED" ? false : true
+                        }
+                      >
                         Create Receipt
                       </button>
                     </div>
-                  </NavLink>
-                </td>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

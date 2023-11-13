@@ -4,3 +4,8 @@ export const userRole = {
   STOREKEEPER: "Store Keeper",
   USER: "User",
 };
+export const statusPricedBill = {
+  PENDING: "PENDING",
+  ACCEPTED: "ACCEPTED",
+  CANCEL: "CANCEL",
+};

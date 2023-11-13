@@ -61,7 +61,7 @@ const Requisition = () => {
               <th>Item Name</th>
               <th>Quantity</th>
               <th>Purpose</th>
-              <th>Actions</th>
+              {user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -75,19 +75,20 @@ const Requisition = () => {
                   <td>{requisition?.item?.item_name}</td>
                   <td>{requisition?.quantity}</td>
                   <td>{requisition?.purpose}</td>
-                  <td>
-                    <div className="button-container">
-                      {/* <button className="delete-button">Delete</button> */}
-                      {user?.role_name === userRole.SUPERADMIN && (
+                  {user?.role_name === userRole.SUPERADMIN && (
+                    <td>
+                      <div className="button-container">
+                        {/* <button className="delete-button">Delete</button> */}
+
                         <button
                           className="tender-button"
                           onClick={() => handleCreateTender(requisition?.id)}
                         >
                           Create Tender
                         </button>
-                      )}
-                    </div>
-                  </td>
+                      </div>
+                    </td>
+                  )}
                 </tr>
               ))}
           </tbody>

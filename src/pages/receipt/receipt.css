@@ -64,7 +64,8 @@ td {
   text-align: center;
 }
 
-#seeReceipt .delete-button {
+#seeReceipt .delete-button,
+#seeReceipt .addDamagedQuantity-button {
   padding: 5px 10px;
   margin: 5px;
   cursor: pointer;
@@ -72,5 +73,9 @@ td {
 
 #seeReceipt .delete-button {
   background-color: #f44336;
+  color: white;
+}
+#seeReceipt .addDamagedQuantity-button {
+  background-color: #ff9800;
   color: white;
 }

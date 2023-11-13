@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./report.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
+import { userRole } from "../../utils/enums";
+import { AuthContext } from "../../contexts/authContext";
 const Report = () => {
+  const { user } = useContext(AuthContext);
   const [report, setReports] = useState();
   useEffect(() => {
     fetch(`${baseUrl}/report/getAllReports`, {
@@ -39,7 +42,6 @@ const Report = () => {
               <th>Balance</th>
               <th>Manager Id</th>
               <th>Manager Name</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,11 +57,6 @@ const Report = () => {
                 <td>{report?.balance}</td>
                 <td>{report?.creator?.ex_id}</td>
                 <td>{report?.creator?.ex_name}</td>
-                <td>
-                  <div className="button-container">
-                    <button className="delete-button">Delete</button>
-                  </div>
-                </td>
               </tr>
             ))}
           </tbody>

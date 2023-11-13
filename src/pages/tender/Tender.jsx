@@ -59,7 +59,7 @@ const Tender = () => {
               <th>Item Name</th>
               <th>Quantity</th>
               <th>Deadline</th>
-              <th>Actions</th>
+              {user?.role_name === userRole.USER && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -74,19 +74,20 @@ const Tender = () => {
                   <td>{tender?.requisition?.item?.item_name}</td>
                   <td>{tender?.requisition?.quantity}</td>
                   <td>{tender?.deadline}</td>
-                  <td>
-                    <div className="button-container">
-                      {/* <button className="delete-button">Delete</button> */}
-                      {user?.role_name === userRole.USER && (
+                  {user?.role_name === userRole.USER && (
+                    <td>
+                      <div className="button-container">
+                        {/* <button className="delete-button">Delete</button> */}
+
                         <button
                           className="pricedBill-button"
                           onClick={() => handleCreatePricedBill(tender?.id)}
                         >
                           Create PricedBill
                         </button>
-                      )}
-                    </div>
-                  </td>
+                      </div>
+                    </td>
+                  )}
                 </tr>
               ))}
           </tbody>

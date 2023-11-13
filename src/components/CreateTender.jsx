@@ -3,8 +3,10 @@ import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CreateTender = ({ id, setIsCreateTender }) => {
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -31,6 +33,7 @@ const CreateTender = ({ id, setIsCreateTender }) => {
           });
           setLoading(false);
           toast.success("Tender Created Successfully");
+          navigate("/tender");
         } else {
           setLoading(false);
           toast.error(data.message);

@@ -1,9 +1,12 @@
 import "./receipt.css";
 import DamagedQuantity from "../../components/damagedQuantity";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
+import { userRole } from "../../utils/enums";
+import { AuthContext } from "../../contexts/authContext";
 const Receipt = () => {
+  const { user } = useContext(AuthContext);
   const [receipt, setReceipts] = useState();
   useEffect(() => {
     fetch(`${baseUrl}/receipt/getAllReceipts`, {
@@ -26,7 +29,7 @@ const Receipt = () => {
 
   return (
     <div id="receipt">
-      <DamagedQuantity />
+      {user?.role_name === userRole.SUPERADMIN && <DamagedQuantity />}
       <div id="seeReceipt">
         <table>
           <thead>
@@ -39,8 +42,7 @@ const Receipt = () => {
               <th>Expected Delivery Date</th>
               <th>Damaged Quantity</th>
               <th>Receiver Id</th>
-              {/* <th>Receiver Name</th> */}
-              <th>Action</th>
+              {user?.role_name === userRole.SUPERADMIN && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -57,11 +59,15 @@ const Receipt = () => {
                 <td>{receipt?.damaged_quantity}</td>
                 <td>{receipt?.receiver_id}</td>
                 {/* <td>{receipt?.receiver_name}</td> */}
-                <td>
-                  <div className="button-container">
-                    <button className="delete-button">Delete</button>
-                  </div>
-                </td>
+                {user?.role_name === userRole.SUPERADMIN && (
+                  <td>
+                    <div className="button-container">
+                      <button className="addDamagedQuantity-button">
+                        Add Damaged Quantity
+                      </button>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
