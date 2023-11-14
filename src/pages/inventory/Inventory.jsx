@@ -28,7 +28,9 @@ const Inventory = () => {
   }, []);
   return (
     <div id="inventory">
-      {user?.role_name === userRole.SUPERADMIN && <CreateReport />}
+      {(user?.role_name === userRole.SUPERADMIN ||
+        user?.role_name === userRole.ADMIN ||
+        user?.role_name === userRole.STOREKEEPER) && <CreateReport />}
       <div id="seeInventory">
         <table>
           <thead>
@@ -40,7 +42,9 @@ const Inventory = () => {
               <th>Quantity Out</th>
               <th>Manager Id</th>
               <th>Manager Name</th>
-              {user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
+              {(user?.role_name === userRole.SUPERADMIN ||
+                user?.role_name === userRole.ADMIN ||
+                user?.role_name === userRole.STOREKEEPER) && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -53,7 +57,9 @@ const Inventory = () => {
                 <td>{inventory?.quantity_out}</td>
                 <td>{inventory?.manager?.ex_id}</td>
                 <td>{inventory?.manager?.ex_name}</td>
-                {user?.role_name === userRole.SUPERADMIN && (
+                {(user?.role_name === userRole.SUPERADMIN ||
+                  user?.role_name === userRole.ADMIN ||
+                  user?.role_name === userRole.STOREKEEPER) && (
                   <td>
                     <div className="button-container">
                       {/* <button className="delete-button">Delete</button> */}

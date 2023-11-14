@@ -7,10 +7,13 @@ import CreateRequisition from "../../components/CreateRequisition";
 import QuantityOut from "../../components/QuantityOut";
 import { AuthContext } from "../../contexts/authContext";
 import { userRole } from "../../utils/enums";
+import Spinner from "../../components/spinner/Spinner";
 
 const Items = () => {
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState();
+  const [isLoading, setLoading] = useState(false);
+  const [isItemAdded, setIsItemAdded] = useState(false);
 
   const [isCreateRequisition, setIsCreateRequisition] = useState({
     isON: false,
@@ -22,6 +25,7 @@ const Items = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${baseUrl}/item/getItem`, {
       headers: {
         Authorization: `${getStoredData("token")}`,
@@ -32,13 +36,15 @@ const Items = () => {
       .then((data) => {
         if (data?.status == "200") {
           setItems(data.data);
+          setLoading(false);
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Error:", error);
         alert("An error occurred during see Item. Please try again.");
       });
-  }, []);
+  }, [isItemAdded]);
 
   const handleCreateRequisition = (id) => {
     setIsCreateRequisition();
@@ -51,7 +57,9 @@ const Items = () => {
 
   return (
     <div id="items">
-      {user?.role_name === userRole.ADMIN && <CreateItem />}
+      {user?.role_name === userRole.ADMIN && (
+        <CreateItem setIsItemAdded={setIsItemAdded} />
+      )}
 
       {isCreateRequisition?.isON && (
         <CreateRequisition
@@ -60,46 +68,51 @@ const Items = () => {
         />
       )}
       {isQuantityOut?.isON && <QuantityOut />}
-
-      <div id="seeItems">
-        <table>
-          <thead>
-            <tr>
-              <th>Item Id</th>
-              <th>Item Name</th>
-              {!user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {items?.map((item) => (
-              <tr key={item?.id}>
-                <td>{item?.id}</td>
-                <td>{item?.item_name}</td>
-                {!user?.role_name === userRole.SUPERADMIN && (
-                  <td>
-                    <div className="button-container">
-                      {/* <button className="delete-button">Delete</button> */}
-                      {user?.role_name === userRole.ADMIN && (
-                        <button
-                          className="requisition-button"
-                          onClick={() => handleCreateRequisition(item?.id)}
-                        >
-                          Create Requisition
-                        </button>
-                      )}
-                      {user?.role_name === userRole.STOREKEEPER && (
-                        <button className="quantityOut-button">
-                          Quantity Out
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                )}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div id="seeItems">
+          <table>
+            <thead>
+              <tr>
+                <th>Item Id</th>
+                <th>Item Name</th>
+                {(user?.role_name === userRole.ADMIN ||
+                  user?.role_name === userRole.STOREKEEPER) && <th>Actions</th>}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {items?.map((item) => (
+                <tr key={item?.id}>
+                  <td>{item?.id}</td>
+                  <td>{item?.item_name}</td>
+                  {(user?.role_name === userRole.ADMIN ||
+                    user?.role_name === userRole.STOREKEEPER) && (
+                    <td>
+                      <div className="button-container">
+                        {/* <button className="delete-button">Delete</button> */}
+                        {user?.role_name === userRole.ADMIN && (
+                          <button
+                            className="requisition-button"
+                            onClick={() => handleCreateRequisition(item?.id)}
+                          >
+                            Create Requisition
+                          </button>
+                        )}
+                        {user?.role_name === userRole.STOREKEEPER && (
+                          <button className="quantityOut-button">
+                            Quantity Out
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

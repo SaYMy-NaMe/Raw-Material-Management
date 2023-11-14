@@ -4,10 +4,11 @@ import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 import { toast } from "react-hot-toast";
 
-const CreateItem = () => {
+const CreateItem = ({ setIsItemAdded }) => {
   const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsItemAdded((isItemAdded) => !isItemAdded);
     setLoading(true);
     const addItemData = {
       item_name: e.target.item_name.value,
@@ -24,6 +25,7 @@ const CreateItem = () => {
       .then((data) => {
         if (data?.status == "200") {
           setLoading(false);
+          setIsItemAdded((isItemAdded) => !isItemAdded);
           toast.success("Item Created Successfully");
         } else {
           setLoading(false);

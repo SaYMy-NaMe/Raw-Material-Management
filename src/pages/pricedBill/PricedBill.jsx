@@ -4,7 +4,7 @@ import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import Status from "../../components/Status";
 import CreateReceipt from "../../components/CreateReceipt";
-import { userRole } from "../../utils/enums";
+import { statusPricedBill, userRole } from "../../utils/enums";
 import { AuthContext } from "../../contexts/authContext";
 
 const PricedBill = () => {
@@ -46,7 +46,8 @@ const PricedBill = () => {
               <th>Price</th>
               <th>Total Price</th>
               <th>Status</th>
-              {user?.role_name === userRole.USER && <th>Actions</th>}
+              {(user?.role_name === userRole.USER ||
+                user?.role_name === userRole.SUPERADMIN) && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -60,21 +61,29 @@ const PricedBill = () => {
                 <td>{pricedBill?.price}</td>
                 <td>{pricedBill?.total_price}</td>
                 <td>{pricedBill?.status}</td>
-                {user?.role_name === userRole.USER && (
+                {(user?.role_name === userRole.USER ||
+                  user?.role_name === userRole.SUPERADMIN) && (
                   <td>
                     <div className="button-container">
                       {/* <button className="delete-button">Delete</button> */}
                     </div>
 
                     <div className="button-container">
-                      <button
-                        className="createReceipt-button"
-                        disabled={
-                          pricedBill?.status === "ACCEPTED" ? false : true
-                        }
-                      >
-                        Create Receipt
-                      </button>
+                      {user?.role_name === userRole.USER && (
+                        <button
+                          className="createReceipt-button"
+                          disabled={
+                            pricedBill?.status === statusPricedBill.ACCEPTED
+                              ? false
+                              : true
+                          }
+                        >
+                          Create Receipt
+                        </button>
+                      )}
+                      {user?.role_name === userRole.SUPERADMIN && (
+                        <button className="createReceipt-button">Accept</button>
+                      )}
                     </div>
                   </td>
                 )}

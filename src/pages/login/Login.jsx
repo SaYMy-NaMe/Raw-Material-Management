@@ -7,6 +7,7 @@ import { setStoredData } from "../../utils/localStorage";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { AuthContext } from "../../contexts/authContext";
+import Spinner from "../../components/spinner/Spinner";
 
 const Login = () => {
   const { setUser } = useContext(AuthContext);
@@ -86,15 +87,12 @@ const Login = () => {
         alert("An error occurred during Sign in. Please try again.");
       });
   };
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
 
   return (
     <div id="login">
+      {isLoading && <Spinner />}
       <h1>Please Login Here...</h1>
+
       <form action="submit" onSubmit={handleSubmit}>
         <InputField
           type="email"
@@ -112,7 +110,7 @@ const Login = () => {
         <NavLink to="/forgot-password" className="linkText">
           Forgot Password?
         </NavLink>
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Sign In
         </button>
         <p>
