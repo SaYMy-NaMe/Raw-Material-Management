@@ -7,7 +7,7 @@ const CreatePricedBill = ({ id, setIsCreatePricedBill }) => {
     const CreatePricedBill = {
       tender_id: id,
       price: e.target.price.value,
-      // Status ENUM
+      status: e.target.statusPricedBill.value,
     };
     console.log(CreatePricedBill);
     //API implementation

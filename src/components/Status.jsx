@@ -1,25 +1,20 @@
 import { statusPricedBill } from "../utils/enums";
 import InputField from "./InputField";
 
-const Status = () => {
+const Status = ({ id, setIsAddStatusPricedBill }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const pricedBillStatusData = {
-      pricedBill_id: "",
+    const statusData = {
+      pricedBill_id: id,
       pricedBillStatus: e.target.pricedBillStatus.value,
     };
-    console.log(pricedBillStatusData);
+    console.log(statusData);
   };
   return (
     <div id="status">
       <h1>Status of Priced Bill</h1>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField
-          type="text"
-          name="item_name"
-          fieldName="Status Name"
-          placeholder="Enter Status"
-        />
+        <InputField type="text" fieldName="ID" value={id} />
         <div className="inputField">
           <p>Do you want to take the deal?</p>
           <select name="pricedBillStatus" id="pricedBillStatus">

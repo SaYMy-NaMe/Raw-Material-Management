@@ -3,7 +3,7 @@ import Inventory from "../pages/inventory/Inventory";
 import Items from "../pages/items/Items";
 import PricedBill from "../pages/pricedBill/PricedBill";
 import Receipt from "../pages/receipt/Receipt";
-import Report from "../pages/report/Report";
+import Report from "../pages/reportInventory/Report";
 import Requisition from "../pages/requisition/Requisition";
 import Tender from "../pages/tender/Tender";
 

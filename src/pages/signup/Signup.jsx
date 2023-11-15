@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
+import Spinner from "../../components/spinner/Spinner";
 
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
@@ -48,14 +49,9 @@ const Signup = () => {
       });
   };
 
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
-
   return (
     <div id="signup">
+      {isLoading && <Spinner />}
       <h1>Sign up</h1>
       <p>Enter details to create your account!</p>
       <form action="submit" onSubmit={handleSubmit}>
@@ -90,7 +86,7 @@ const Signup = () => {
             Login
           </NavLink>
         </p>
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Sign Up
         </button>
       </form>

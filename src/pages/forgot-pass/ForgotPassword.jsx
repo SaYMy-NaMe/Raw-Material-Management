@@ -4,6 +4,7 @@ import "./forgotPassword.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
+import Spinner from "../../components/spinner/Spinner";
 
 const ForgotPassword = () => {
   const [isLoading, setLoading] = useState(false);
@@ -42,13 +43,10 @@ const ForgotPassword = () => {
         alert("An error occurred during Sign in. Please try again.");
       });
   };
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
+
   return (
     <div id="forgotPassword">
+      {isLoading && <Spinner />}
       <h1>Forgot Password</h1>
       <p>Enter your email to retrieve your account</p>
       <form action="submit" onSubmit={handleSubmit}>
@@ -58,7 +56,7 @@ const ForgotPassword = () => {
           fieldName="Email"
           placeholder="Enter your email"
         />
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Submit
         </button>
       </form>

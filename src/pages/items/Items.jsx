@@ -54,6 +54,14 @@ const Items = () => {
     });
     window.scrollTo({ top: 350, behavior: "smooth" });
   };
+  const handleQuantityOut = (id) => {
+    setIsQuantityOut();
+    setIsQuantityOut({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 110, behavior: "smooth" });
+  };
 
   return (
     <div id="items">
@@ -67,7 +75,12 @@ const Items = () => {
           setIsCreateRequisition={setIsCreateRequisition}
         />
       )}
-      {isQuantityOut?.isON && <QuantityOut />}
+      {isQuantityOut?.isON && (
+        <QuantityOut
+          id={isQuantityOut.id}
+          setIsQuantityOut={setIsQuantityOut}
+        />
+      )}
       {isLoading ? (
         <Spinner />
       ) : (
@@ -100,7 +113,10 @@ const Items = () => {
                           </button>
                         )}
                         {user?.role_name === userRole.STOREKEEPER && (
-                          <button className="quantityOut-button">
+                          <button
+                            className="quantityOut-button"
+                            onClick={() => handleQuantityOut(item?.id)}
+                          >
                             Quantity Out
                           </button>
                         )}

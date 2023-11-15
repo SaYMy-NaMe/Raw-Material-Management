@@ -3,6 +3,7 @@ import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 import { toast } from "react-hot-toast";
+import Spinner from "./spinner/Spinner";
 
 const CreateItem = ({ setIsItemAdded }) => {
   const [isLoading, setLoading] = useState(false);
@@ -38,13 +39,9 @@ const CreateItem = ({ setIsItemAdded }) => {
         alert("An error occurred during add Item. Please try again.");
       });
   };
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
   return (
     <div id="addItem" onSubmit={handleSubmit}>
+      {isLoading && <Spinner />}
       <h1>Add Item Here</h1>
       <form action="submit">
         <InputField
@@ -53,7 +50,7 @@ const CreateItem = ({ setIsItemAdded }) => {
           fieldName="Item Name"
           placeholder="Enter Item Name"
         />
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Submit
         </button>
       </form>

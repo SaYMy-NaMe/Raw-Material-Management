@@ -4,15 +4,18 @@ import InputField from "../../components/InputField";
 import "./changePassword.css";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../utils/baseUrl";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import Spinner from "../../components/spinner/Spinner";
 
 const ChangePassword = () => {
   const { user: userData } = useContext(AuthContext);
+  const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const changePasswordData = {
       oldPassword: e.target.oldPassword.value,
       newPassword: e.target.newPassword.value,
@@ -29,6 +32,7 @@ const ChangePassword = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "Password updated successfully") {
+          setLoading(false);
           toast.success("Your password has been updated!");
           navigate("/");
         } else {
@@ -36,12 +40,14 @@ const ChangePassword = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Error:", error);
         alert("An error occurred during Sign in. Please try again.");
       });
   };
   return (
     <div id="changePassword">
+      {isLoading && <Spinner />}
       <h1>Change your password!</h1>
       <form action="submit" onSubmit={handleSubmit}>
         <InputField
@@ -56,7 +62,7 @@ const ChangePassword = () => {
           fieldName="New Password"
           placeholder="Enter your new password"
         />
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Submit
         </button>
       </form>

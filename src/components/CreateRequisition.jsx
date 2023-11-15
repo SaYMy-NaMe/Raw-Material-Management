@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Spinner from "./spinner/Spinner";
 
 const CreateRequisition = ({ id, setIsCreateRequisition }) => {
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
           });
           setLoading(false);
           toast.success("Requisition Created Successfully");
+          navigate("/requisition");
         } else {
           setLoading(false);
           toast.error(data.message);
@@ -43,13 +47,9 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
         alert("An error occurred during create Requisition. Please try again.");
       });
   };
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
   return (
     <div id="createRequisition" onSubmit={handleSubmit}>
+      {isLoading && <Spinner />}
       <h1>Requisition</h1>
       <p>Create your Requisition right here</p>
       <form action="submit">
@@ -78,7 +78,7 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
           fieldName="Purpose"
           placeholder="Purpose"
         />
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Submit
         </button>
       </form>

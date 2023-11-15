@@ -4,6 +4,7 @@ import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./spinner/Spinner";
 
 const CreateTender = ({ id, setIsCreateTender }) => {
   const navigate = useNavigate();
@@ -44,13 +45,10 @@ const CreateTender = ({ id, setIsCreateTender }) => {
         alert("An error occurred during create Requisition. Please try again.");
       });
   };
-  useEffect(() => {
-    if (isLoading) {
-      toast("Loading...");
-    }
-  }, [isLoading]);
   return (
     <div id="createTender">
+      {isLoading && <Spinner />}
+
       <h1>Tender</h1>
       <p>Create your tender here...</p>
       <form action="submit" onSubmit={handleSubmit}>
@@ -61,7 +59,7 @@ const CreateTender = ({ id, setIsCreateTender }) => {
           fieldName="Deadline"
           placeholder="Deadline"
         />
-        <button className="authButton" type="submit">
+        <button className="authButton" type="submit" disabled={isLoading}>
           Submit
         </button>
       </form>
