@@ -2,18 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import "./inventory.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-import CreateReport from "../../components/CreateReport";
 import { AuthContext } from "../../contexts/authContext";
-import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
 const Inventory = () => {
   const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
   const [inventory, setInventory] = useState();
-  const [isCreateReport, setIsCreateReport] = useState({
-    isON: false,
-    id: "",
-  });
   useEffect(() => {
     setLoading(true);
     fetch(`${baseUrl}/inventory/getAllInventory`, {
@@ -35,22 +29,8 @@ const Inventory = () => {
         alert("An error occurred during see all Inventory. Please try again.");
       });
   }, []);
-  const handleCreateReport = (id) => {
-    setIsCreateReport();
-    setIsCreateReport({
-      isON: true,
-      id: id,
-    });
-    window.scrollTo({ top: 100, behavior: "smooth" });
-  };
   return (
     <div id="inventory">
-      {isCreateReport?.isON && (
-        <CreateReport
-          id={isCreateReport.id}
-          setIsCreateReport={setIsCreateReport}
-        />
-      )}
       {isLoading ? (
         <Spinner />
       ) : (
@@ -65,8 +45,6 @@ const Inventory = () => {
                 <th>Quantity Out</th>
                 <th>Manager Id</th>
                 <th>Manager Name</th>
-                {(user?.role_name === userRole.STOREKEEPER ||
-                  user?.role_name === userRole.ADMIN) && <th>Actions</th>}
               </tr>
             </thead>
             <tbody>
@@ -79,22 +57,6 @@ const Inventory = () => {
                   <td>{inventory?.quantity_out}</td>
                   <td>{inventory?.manager?.ex_id}</td>
                   <td>{inventory?.manager?.ex_name}</td>
-                  {(user?.role_name === userRole.STOREKEEPER ||
-                    user?.role_name === userRole.ADMIN) && (
-                    <td>
-                      <div className="button-container">
-                        {/* <button className="delete-button">Delete</button> */}
-                        <button
-                          className="createReport-button"
-                          onClick={() =>
-                            handleCreateReport(inventory?.item?.id)
-                          }
-                        >
-                          CreateReport
-                        </button>
-                      </div>
-                    </td>
-                  )}
                 </tr>
               ))}
             </tbody>

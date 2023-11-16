@@ -8,6 +8,7 @@ import QuantityOut from "../../components/QuantityOut";
 import { AuthContext } from "../../contexts/authContext";
 import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
+import CreateReport from "../../components/CreateReport";
 
 const Items = () => {
   const { user } = useContext(AuthContext);
@@ -20,6 +21,10 @@ const Items = () => {
     id: "",
   });
   const [isQuantityOut, setIsQuantityOut] = useState({
+    isON: false,
+    id: "",
+  });
+  const [isCreateReport, setIsCreateReport] = useState({
     isON: false,
     id: "",
   });
@@ -62,9 +67,23 @@ const Items = () => {
     });
     window.scrollTo({ top: 110, behavior: "smooth" });
   };
+  const handleCreateReport = (id) => {
+    setIsCreateReport();
+    setIsCreateReport({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 100, behavior: "smooth" });
+  };
 
   return (
     <div id="items">
+      {isCreateReport?.isON && (
+        <CreateReport
+          id={isCreateReport.id}
+          setIsCreateReport={setIsCreateReport}
+        />
+      )}
       {user?.role_name === userRole.ADMIN && (
         <CreateItem setIsItemAdded={setIsItemAdded} />
       )}
@@ -103,7 +122,12 @@ const Items = () => {
                     user?.role_name === userRole.STOREKEEPER) && (
                     <td>
                       <div className="button-container">
-                        {/* <button className="delete-button">Delete</button> */}
+                        <button
+                          className="requisition-button"
+                          onClick={() => handleCreateReport(item?.id)}
+                        >
+                          Create Report
+                        </button>
                         {user?.role_name === userRole.ADMIN && (
                           <button
                             className="requisition-button"

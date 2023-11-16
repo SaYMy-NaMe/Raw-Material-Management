@@ -16,6 +16,10 @@ const PricedBill = () => {
     isON: false,
     id: "",
   });
+  const [isCreateReceipt, setIsCreateReceipt] = useState({
+    isON: false,
+    id: "",
+  });
   useEffect(() => {
     setLoading(true);
     fetch(`${baseUrl}/pricedBill/getAllPricedBill`, {
@@ -39,6 +43,14 @@ const PricedBill = () => {
         );
       });
   }, []);
+  const handleCreateReceipt = (id) => {
+    setIsCreateReceipt();
+    setIsCreateReceipt({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 110, behavior: "smooth" });
+  };
   const handleAddStatusPricedBill = (id) => {
     setIsAddStatusPricedBill();
     setIsAddStatusPricedBill({
@@ -55,7 +67,12 @@ const PricedBill = () => {
           setIsAddStatusPricedBill={setIsAddStatusPricedBill}
         />
       )}
-      {user?.role_name === userRole.USER && <CreateReceipt />}
+      {isCreateReceipt?.isON && (
+        <CreateReceipt
+          id={isCreateReceipt.id}
+          setIsCreateReceipt={setIsCreateReceipt}
+        />
+      )}
       {isLoading ? (
         <Spinner />
       ) : (
@@ -102,6 +119,7 @@ const PricedBill = () => {
                                 ? false
                                 : true
                             }
+                            onClick={() => handleCreateReceipt(pricedBill?.id)}
                           >
                             Create Receipt
                           </button>
@@ -111,6 +129,11 @@ const PricedBill = () => {
                             className="createReceipt-button"
                             onClick={() =>
                               handleAddStatusPricedBill(pricedBill?.id)
+                            }
+                            disabled={
+                              pricedBill?.status ===
+                                statusPricedBill.ACCEPTED ||
+                              pricedBill?.status === statusPricedBill.CANCEL
                             }
                           >
                             Accept

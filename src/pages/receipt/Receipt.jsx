@@ -1,15 +1,19 @@
 import "./receipt.css";
-import DamagedQuantity from "../../components/damagedQuantity";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import { userRole } from "../../utils/enums";
 import { AuthContext } from "../../contexts/authContext";
 import Spinner from "../../components/spinner/Spinner";
+import DamagedQuantity from "../../components/DamagedQuantity";
 const Receipt = () => {
   const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
   const [receipt, setReceipts] = useState();
+  const [isAddDamagedQuantity, setIsAddDamagedQuantity] = useState({
+    isON: false,
+    id: "",
+  });
   useEffect(() => {
     setLoading(true);
     fetch(`${baseUrl}/receipt/getAllReceipts`, {
@@ -32,9 +36,23 @@ const Receipt = () => {
       });
   }, []);
 
+  const handleAddDamagedQuantity = (id) => {
+    setIsAddDamagedQuantity();
+    setIsAddDamagedQuantity({
+      isON: true,
+      id: id,
+    });
+    window.scrollTo({ top: 110, behavior: "smooth" });
+  };
+
   return (
     <div id="receipt">
-      {user?.role_name === userRole.STOREKEEPER && <DamagedQuantity />}
+      {isAddDamagedQuantity?.isON && (
+        <DamagedQuantity
+          id={isAddDamagedQuantity.id}
+          setIsAddDamagedQuantity={setIsAddDamagedQuantity}
+        />
+      )}
       {isLoading ? (
         <Spinner />
       ) : (
@@ -50,6 +68,7 @@ const Receipt = () => {
                 <th>Expected Delivery Date</th>
                 <th>Damaged Quantity</th>
                 <th>Receiver Id</th>
+                <th>Receiver Name</th>
                 {user?.role_name === userRole.STOREKEEPER && <th>Action</th>}
               </tr>
             </thead>
@@ -66,11 +85,15 @@ const Receipt = () => {
                   <td>{receipt?.expected_delivery_date}</td>
                   <td>{receipt?.damaged_quantity}</td>
                   <td>{receipt?.receiver_id}</td>
-                  {/* <td>{receipt?.receiver_name}</td> */}
+                  <td>{receipt?.reciver?.ex_name}</td>
                   {user?.role_name === userRole.STOREKEEPER && (
                     <td>
                       <div className="button-container">
-                        <button className="addDamagedQuantity-button">
+                        <button
+                          className="addDamagedQuantity-button"
+                          disabled={receipt?.receiver_id ? true : false}
+                          onClick={() => handleAddDamagedQuantity(receipt?.id)}
+                        >
                           Add Damaged Quantity
                         </button>
                       </div>

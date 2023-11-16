@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header id="header">
       <NavLink to="/" id="header-title">
-        Raw material management
+        IICT Construction Site Raw material management
       </NavLink>
       <ul id="header-navigation">
         {userData?.token ? (
@@ -53,9 +53,6 @@ const Header = () => {
             {userData?.role_name === userRole.USER ? null : (
               <>
                 <li>
-                  <NavLink to="/receipt">Receipt</NavLink>
-                </li>
-                <li>
                   <NavLink to="/inventory">Inventory</NavLink>
                 </li>
                 <li>
@@ -63,6 +60,11 @@ const Header = () => {
                 </li>
               </>
             )}
+
+            <li>
+              <NavLink to="/receipt">Receipt</NavLink>
+            </li>
+
             <li>
               <NavLink to="/change-password">Change Password</NavLink>
             </li>
