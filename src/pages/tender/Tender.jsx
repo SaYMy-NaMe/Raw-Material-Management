@@ -6,6 +6,7 @@ import CreatePricedBill from "../../components/CreatePricedBill";
 import { AuthContext } from "../../contexts/authContext";
 import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
+import dateFormatter from "../../utils/dateFormatter";
 const Tender = () => {
   const { user, setUser } = useContext(AuthContext);
   const [tenders, setTenders] = useState();
@@ -81,7 +82,7 @@ const Tender = () => {
                     <td>{tender?.requisition?.item?.id}</td>
                     <td>{tender?.requisition?.item?.item_name}</td>
                     <td>{tender?.requisition?.quantity}</td>
-                    <td>{tender?.deadline}</td>
+                    <td>{dateFormatter(tender?.deadline)}</td>
                     {user?.role_name === userRole.USER && (
                       <td>
                         <div className="button-container">

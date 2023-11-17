@@ -4,6 +4,7 @@ import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import { AuthContext } from "../../contexts/authContext";
 import Spinner from "../../components/spinner/Spinner";
+import dateFormatter from "../../utils/dateFormatter";
 const Report = () => {
   const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
@@ -61,8 +62,8 @@ const Report = () => {
                   <td>{report?.item?.item_name}</td>
                   <td>{report?.total_quantity_in}</td>
                   <td>{report?.total_quantity_out}</td>
-                  <td>{report?.start_date}</td>
-                  <td>{report?.end_date}</td>
+                  <td>{dateFormatter(report?.start_date)}</td>
+                  <td>{dateFormatter(report?.end_date)}</td>
                   <td>{report?.balance}</td>
                   <td>{report?.creator?.ex_id}</td>
                   <td>{report?.creator?.ex_name}</td>
