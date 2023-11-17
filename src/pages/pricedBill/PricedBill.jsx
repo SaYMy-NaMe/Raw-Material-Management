@@ -5,8 +5,9 @@ import { getStoredData } from "../../utils/localStorage";
 import Status from "../../components/Status";
 import CreateReceipt from "../../components/CreateReceipt";
 import { statusPricedBill, userRole } from "../../utils/enums";
-import { AuthContext } from "../../contexts/authContext";
+
 import Spinner from "../../components/spinner/Spinner";
+import AuthContext from "../../contexts/AuthContext";
 
 const PricedBill = () => {
   const { user } = useContext(AuthContext);

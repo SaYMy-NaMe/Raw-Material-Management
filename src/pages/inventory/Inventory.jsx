@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./inventory.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-import { AuthContext } from "../../contexts/authContext";
+
 import Spinner from "../../components/spinner/Spinner";
 const Inventory = () => {
-  const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
   const [inventory, setInventory] = useState();
   useEffect(() => {

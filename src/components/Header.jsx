@@ -2,11 +2,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeStorageData } from "../utils/localStorage";
 import LogoutIcon from "../assets/svgs/LogoutIcon";
-import { AuthContext } from "../contexts/authContext";
+
 import { useContext, useState } from "react";
 import { userRole } from "../utils/enums";
 import userIcon from "../assets/imgs/user.png";
 import logo from "../assets/imgs/logo.png";
+import AuthContext from "../contexts/AuthContext";
 
 // eslint-disable-next-line react/prop-types
 const Header = () => {

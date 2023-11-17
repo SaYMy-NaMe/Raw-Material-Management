@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { getStoredData } from "../utils/localStorage";
-import { AuthContext } from "../contexts/authContext";
+import AuthContext from "../contexts/AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();

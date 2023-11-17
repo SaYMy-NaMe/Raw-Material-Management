@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./report.css";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
-import { AuthContext } from "../../contexts/authContext";
+
 import Spinner from "../../components/spinner/Spinner";
 import dateFormatter from "../../utils/dateFormatter";
 const Report = () => {
-  const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
 
   const [report, setReports] = useState();

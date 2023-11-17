@@ -6,8 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { setStoredData } from "../../utils/localStorage";
 import { useContext, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
-import { AuthContext } from "../../contexts/authContext";
 import Spinner from "../../components/spinner/Spinner";
+import AuthContext from "../../contexts/AuthContext";
 
 const Login = () => {
   const { setUser } = useContext(AuthContext);
@@ -50,20 +50,20 @@ const Login = () => {
             })
               .then((response) => response.json())
               .then((userData) => {
-                if (userData) {
+                if (userData?.status == 200) {
                   setLoading(false);
                   console.log(userData);
                   setStoredData("user", {
-                    ex_name: userData.ex_name,
-                    ex_email: userData.ex_email,
-                    role_name: userData.role_name,
+                    ex_name: userData?.data?.user?.ex_name,
+                    ex_email: userData?.data?.user?.ex_email,
+                    role_name: userData?.data?.user?.role_name,
                   });
 
                   setUser({
                     token: data.token,
-                    ex_name: userData.ex_name,
-                    ex_email: userData.ex_email,
-                    role_name: userData.role_name,
+                    ex_name: userData?.data?.user?.ex_name,
+                    ex_email: userData?.data?.user?.ex_email,
+                    role_name: userData?.data?.user?.role_name,
                   });
                   navigate("/");
                 }

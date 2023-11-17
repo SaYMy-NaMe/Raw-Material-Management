@@ -5,8 +5,9 @@ import "./changePassword.css";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../utils/baseUrl";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/authContext";
+
 import Spinner from "../../components/spinner/Spinner";
+import AuthContext from "../../contexts/AuthContext";
 
 const ChangePassword = () => {
   const { user: userData } = useContext(AuthContext);

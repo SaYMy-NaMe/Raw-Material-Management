@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { getStoredData } from "../../utils/localStorage";
 import { baseUrl } from "../../utils/baseUrl";
 import CreateTender from "../../components/CreateTender";
-import { AuthContext } from "../../contexts/authContext";
+
 import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
+import AuthContext from "../../contexts/AuthContext";
 const Requisition = () => {
   const { user } = useContext(AuthContext);
   const [requisitions, setRequisitions] = useState();
@@ -89,7 +90,7 @@ const Requisition = () => {
                           {/* <button className="delete-button">Delete</button> */}
 
                           <button
-                            className="tender-button"
+                            className="primary-button"
                             onClick={() => handleCreateTender(requisition?.id)}
                           >
                             Create Tender

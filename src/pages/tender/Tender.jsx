@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../../utils/baseUrl";
 import { getStoredData } from "../../utils/localStorage";
 import CreatePricedBill from "../../components/CreatePricedBill";
-import { AuthContext } from "../../contexts/authContext";
+
 import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
 import dateFormatter from "../../utils/dateFormatter";
+import AuthContext from "../../contexts/AuthContext";
 const Tender = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [tenders, setTenders] = useState();
   const [isLoading, setLoading] = useState(false);
   const [isCreatePricedBill, setIsCreatePricedBill] = useState({
