@@ -113,7 +113,7 @@ const PricedBill = () => {
                       <div className="button-container">
                         {user?.role_name === userRole.USER && (
                           <button
-                            className="createReceipt-button"
+                            className="primary-button"
                             disabled={
                               pricedBill?.status === statusPricedBill.ACCEPTED
                                 ? false
@@ -126,7 +126,7 @@ const PricedBill = () => {
                         )}
                         {user?.role_name === userRole.SUPERADMIN && (
                           <button
-                            className="createReceipt-button"
+                            className="primary-button"
                             onClick={() =>
                               handleAddStatusPricedBill(pricedBill?.id)
                             }

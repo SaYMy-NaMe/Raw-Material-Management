@@ -53,9 +53,7 @@ const UserList = () => {
                   <td>{user?.ex_contactNO}</td>
                   <td>
                     <div className="button-container">
-                      <button className="requisition-button">
-                        Approve User
-                      </button>
+                      <button className="primary-button">Approve User</button>
                     </div>
                   </td>
                 </tr>

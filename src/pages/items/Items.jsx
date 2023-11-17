@@ -123,14 +123,14 @@ const Items = () => {
                     <td>
                       <div className="button-container">
                         <button
-                          className="requisition-button"
+                          className="primary-button"
                           onClick={() => handleCreateReport(item?.id)}
                         >
                           Create Report
                         </button>
                         {user?.role_name === userRole.ADMIN && (
                           <button
-                            className="requisition-button"
+                            className="primary-button"
                             onClick={() => handleCreateRequisition(item?.id)}
                           >
                             Create Requisition
@@ -138,7 +138,7 @@ const Items = () => {
                         )}
                         {user?.role_name === userRole.STOREKEEPER && (
                           <button
-                            className="quantityOut-button"
+                            className="primary-button"
                             onClick={() => handleQuantityOut(item?.id)}
                           >
                             Quantity Out

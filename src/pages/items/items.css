@@ -67,7 +67,6 @@ td {
 }
 
 #seeItems .delete-button,
-#seeItems .requisition-button,
 #seeItems .deleteFromInventory-button,
 #seeItems .createReport-button,
 #seeItems .quantityOut-button {
@@ -81,10 +80,6 @@ td {
   color: white;
 }
 
-#seeItems .requisition-button {
-  background-color: #ff9800;
-  color: white;
-}
 #seeItems .deleteFromInventory-button {
   background-color: #24a0ed;
   color: white;

@@ -89,7 +89,7 @@ const Tender = () => {
                           {/* <button className="delete-button">Delete</button> */}
 
                           <button
-                            className="pricedBill-button"
+                            className="primary-button"
                             onClick={() => handleCreatePricedBill(tender?.id)}
                           >
                             Create PricedBill

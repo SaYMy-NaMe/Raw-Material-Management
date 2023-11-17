@@ -6,6 +6,7 @@ import { userRole } from "../../utils/enums";
 import { AuthContext } from "../../contexts/authContext";
 import Spinner from "../../components/spinner/Spinner";
 import DamagedQuantity from "../../components/DamagedQuantity";
+import dateFormatter from "../../utils/dateFormatter";
 const Receipt = () => {
   const { user } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
@@ -82,7 +83,7 @@ const Receipt = () => {
                     {receipt?.priced_bill?.tender?.requisition?.item?.item_name}
                   </td>
                   <td>{receipt?.priced_bill?.tender?.requisition?.quantity}</td>
-                  <td>{receipt?.expected_delivery_date}</td>
+                  <td>{dateFormatter(receipt?.expected_delivery_date)}</td>
                   <td>{receipt?.damaged_quantity}</td>
                   <td>{receipt?.receiver_id}</td>
                   <td>{receipt?.reciver?.ex_name}</td>
@@ -90,7 +91,7 @@ const Receipt = () => {
                     <td>
                       <div className="button-container">
                         <button
-                          className="addDamagedQuantity-button"
+                          className="primary-button"
                           disabled={receipt?.receiver_id ? true : false}
                           onClick={() => handleAddDamagedQuantity(receipt?.id)}
                         >
