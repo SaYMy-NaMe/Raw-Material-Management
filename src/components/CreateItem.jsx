@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { baseUrl } from "../utils/baseUrl";
 import { getStoredData } from "../utils/localStorage";
 import InputField from "./InputField";
@@ -9,7 +9,7 @@ const CreateItem = ({ setIsItemAdded }) => {
   const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsItemAdded((isItemAdded) => !isItemAdded);
+
     setLoading(true);
     const addItemData = {
       item_name: e.target.item_name.value,

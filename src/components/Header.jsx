@@ -3,14 +3,19 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { removeStorageData } from "../utils/localStorage";
 import LogoutIcon from "../assets/svgs/LogoutIcon";
 import { AuthContext } from "../contexts/authContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { userRole } from "../utils/enums";
+import userIcon from "../assets/imgs/user.png";
+import logo from "../assets/imgs/logo.png";
 
 // eslint-disable-next-line react/prop-types
 const Header = () => {
   const { user: userData, setUser } = useContext(AuthContext);
+  const [isProfileON, setisProfileON] = useState(false);
+
   const navigate = useNavigate();
   const handleLogout = () => {
+    setisProfileON((isOn) => !isOn);
     setUser();
     removeStorageData("user");
     removeStorageData("token");
@@ -19,7 +24,7 @@ const Header = () => {
   return (
     <header id="header">
       <NavLink to="/" id="header-title">
-        IICT Construction Site Raw material management
+        <img src={logo} alt="" height={60} />
       </NavLink>
       <ul id="header-navigation">
         {userData?.token ? (
@@ -65,20 +70,32 @@ const Header = () => {
                 </li>
               </>
             )}
-
             <li>
               <NavLink to="/receipt">Receipt</NavLink>
             </li>
-
             <li>
               <NavLink to="/change-password">Change Password</NavLink>
             </li>
-            <li>
-              <button id="logout-button" onClick={handleLogout}>
-                <LogoutIcon />
-                Log Out
-              </button>
-            </li>
+
+            <div className="userIconDiv">
+              <img
+                src={userIcon}
+                width={40}
+                height={40}
+                onClick={() => setisProfileON((isOn) => !isOn)}
+              />
+              {isProfileON && (
+                <div className="userIconDiv2">
+                  <li>
+                    <NavLink to="/#">Profile</NavLink>
+                  </li>
+                  <button id="logout-button" onClick={handleLogout}>
+                    <LogoutIcon />
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <li>

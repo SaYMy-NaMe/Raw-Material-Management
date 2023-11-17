@@ -37,7 +37,6 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "User Login Successful") {
-          setLoading(false);
           toast.success("You've logged in successfully");
 
           if (data.token) {
@@ -52,6 +51,8 @@ const Login = () => {
               .then((response) => response.json())
               .then((userData) => {
                 if (userData) {
+                  setLoading(false);
+                  console.log(userData);
                   setStoredData("user", {
                     ex_name: userData.ex_name,
                     ex_email: userData.ex_email,
@@ -64,6 +65,7 @@ const Login = () => {
                     ex_email: userData.ex_email,
                     role_name: userData.role_name,
                   });
+                  navigate("/");
                 }
               })
               .catch((error) => {
@@ -74,7 +76,6 @@ const Login = () => {
                 );
               });
           }
-          navigate("/");
         } else {
           setLoading(false);
           toast.error(data.message);
