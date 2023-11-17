@@ -6,6 +6,7 @@ import Receipt from "../pages/receipt/Receipt";
 import Report from "../pages/reportInventory/Report";
 import Requisition from "../pages/requisition/Requisition";
 import Tender from "../pages/tender/Tender";
+import UserList from "../pages/userList/UserList";
 
 export const protectedRoutes = [
   {
@@ -39,5 +40,9 @@ export const protectedRoutes = [
   {
     path: "/report",
     element: Report,
+  },
+  {
+    path: "/userList",
+    element: UserList,
   },
 ];

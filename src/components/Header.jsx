@@ -24,6 +24,11 @@ const Header = () => {
       <ul id="header-navigation">
         {userData?.token ? (
           <>
+            {userData?.role_name === userRole.SUPERADMIN && (
+              <li>
+                <NavLink to="/userList">User List</NavLink>
+              </li>
+            )}
             {(userData?.role_name === userRole.ADMIN ||
               userData?.role_name === userRole.STOREKEEPER ||
               userData?.role_name === userRole.SUPERADMIN) && (
