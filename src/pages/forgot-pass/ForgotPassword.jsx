@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.message === "Password sent to your email") {
+        if (data.message === "Password reset instructions sent to your email") {
           setLoading(false);
           toast.success("Password has been sent to your mail");
           navigate("/signin");
