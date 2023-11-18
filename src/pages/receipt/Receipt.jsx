@@ -59,6 +59,9 @@ const Receipt = () => {
         <Spinner />
       ) : (
         <div id="seeReceipt">
+          {/* {receipt.length < 1 ? (
+            <NoDataFound />
+          ) : ( */}
           <table>
             <thead>
               <tr>
@@ -105,6 +108,7 @@ const Receipt = () => {
               ))}
             </tbody>
           </table>
+          {/* )} */}
         </div>
       )}
     </div>

@@ -78,6 +78,9 @@ const PricedBill = () => {
         <Spinner />
       ) : (
         <div id="seePricedBill">
+          {/* {pricedBills.length < 1 ? (
+            <NoDataFound />
+          ) : ( */}
           <table>
             <thead>
               <tr>
@@ -147,6 +150,7 @@ const PricedBill = () => {
               ))}
             </tbody>
           </table>
+          {/* )} */}
         </div>
       )}
     </div>

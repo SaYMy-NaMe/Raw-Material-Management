@@ -6,7 +6,11 @@ import { getStoredData } from "../utils/localStorage";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const DamagedQuantity = ({ id, setIsAddDamagedQuantity }) => {
+const DamagedQuantity = ({
+  id,
+  setIsAddDamagedQuantity,
+  setIsDamagedQuantityAdded,
+}) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
@@ -31,6 +35,9 @@ const DamagedQuantity = ({ id, setIsAddDamagedQuantity }) => {
             isON: false,
             id: "",
           });
+          setIsDamagedQuantityAdded(
+            (isDamagedQuantityAdded) => !isDamagedQuantityAdded
+          );
           setLoading(false);
           toast.success("Damaged Quantity Updated in Receipt Successfully");
           navigate("/inventory");

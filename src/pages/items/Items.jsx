@@ -10,7 +10,6 @@ import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
 import CreateReport from "../../components/CreateReport";
 import AuthContext from "../../contexts/AuthContext";
-import NoDataFound from "../../components/NoDataFound";
 
 const Items = () => {
   const { user } = useContext(AuthContext);
@@ -106,59 +105,57 @@ const Items = () => {
         <Spinner />
       ) : (
         <div id="seeItems">
-          {items.length < 1 ? (
+          {/* {items.length < 1 ? (
             <NoDataFound />
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Item Id</th>
-                  <th>Item Name</th>
+          ) : ( */}
+          <table>
+            <thead>
+              <tr>
+                <th>Item Id</th>
+                <th>Item Name</th>
+                {(user?.role_name === userRole.ADMIN ||
+                  user?.role_name === userRole.STOREKEEPER) && <th>Actions</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {items?.map((item) => (
+                <tr key={item?.id}>
+                  <td>{item?.id}</td>
+                  <td>{item?.item_name}</td>
                   {(user?.role_name === userRole.ADMIN ||
                     user?.role_name === userRole.STOREKEEPER) && (
-                    <th>Actions</th>
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {items?.map((item) => (
-                  <tr key={item?.id}>
-                    <td>{item?.id}</td>
-                    <td>{item?.item_name}</td>
-                    {(user?.role_name === userRole.ADMIN ||
-                      user?.role_name === userRole.STOREKEEPER) && (
-                      <td>
-                        <div className="button-container">
+                    <td>
+                      <div className="button-container">
+                        <button
+                          className="primary-button"
+                          onClick={() => handleCreateReport(item?.id)}
+                        >
+                          Create Report
+                        </button>
+                        {user?.role_name === userRole.ADMIN && (
                           <button
                             className="primary-button"
-                            onClick={() => handleCreateReport(item?.id)}
+                            onClick={() => handleCreateRequisition(item?.id)}
                           >
-                            Create Report
+                            Create Requisition
                           </button>
-                          {user?.role_name === userRole.ADMIN && (
-                            <button
-                              className="primary-button"
-                              onClick={() => handleCreateRequisition(item?.id)}
-                            >
-                              Create Requisition
-                            </button>
-                          )}
-                          {user?.role_name === userRole.STOREKEEPER && (
-                            <button
-                              className="primary-button"
-                              onClick={() => handleQuantityOut(item?.id)}
-                            >
-                              Quantity Out
-                            </button>
-                          )}
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                        )}
+                        {user?.role_name === userRole.STOREKEEPER && (
+                          <button
+                            className="primary-button"
+                            onClick={() => handleQuantityOut(item?.id)}
+                          >
+                            Quantity Out
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* )} */}
         </div>
       )}
     </div>
