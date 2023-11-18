@@ -7,6 +7,7 @@ import CreateTender from "../../components/CreateTender";
 import { userRole } from "../../utils/enums";
 import Spinner from "../../components/spinner/Spinner";
 import AuthContext from "../../contexts/AuthContext";
+import NoDataFound from "../../components/NoDataFound";
 const Requisition = () => {
   const { user } = useContext(AuthContext);
   const [requisitions, setRequisitions] = useState();
@@ -60,48 +61,54 @@ const Requisition = () => {
         <Spinner />
       ) : (
         <div id="seeRequisition">
-          <table>
-            <thead>
-              <tr>
-                <th>Requisition Id</th>
-                <th>Project Name</th>
-                <th>Address</th>
-                <th>Item Id</th>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Purpose</th>
-                {user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {requisitions &&
-                requisitions?.map((requisition) => (
-                  <tr key={requisition?.id}>
-                    <td>{requisition?.id}</td>
-                    <td>{requisition?.project_name}</td>
-                    <td>{requisition?.location}</td>
-                    <td>{requisition?.item?.id}</td>
-                    <td>{requisition?.item?.item_name}</td>
-                    <td>{requisition?.quantity}</td>
-                    <td>{requisition?.purpose}</td>
-                    {user?.role_name === userRole.SUPERADMIN && (
-                      <td>
-                        <div className="button-container">
-                          {/* <button className="delete-button">Delete</button> */}
+          {requisitions?.length < 1 ? (
+            <NoDataFound />
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Requisition Id</th>
+                  <th>Project Name</th>
+                  <th>Address</th>
+                  <th>Item Id</th>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Purpose</th>
+                  {user?.role_name === userRole.SUPERADMIN && <th>Actions</th>}
+                </tr>
+              </thead>
+              <tbody>
+                {requisitions &&
+                  requisitions?.map((requisition) => (
+                    <tr key={requisition?.id}>
+                      <td>{requisition?.id}</td>
+                      <td>{requisition?.project_name}</td>
+                      <td>{requisition?.location}</td>
+                      <td>{requisition?.item?.id}</td>
+                      <td>{requisition?.item?.item_name}</td>
+                      <td>{requisition?.quantity}</td>
+                      <td>{requisition?.purpose}</td>
+                      {user?.role_name === userRole.SUPERADMIN && (
+                        <td>
+                          <div className="button-container">
+                            {/* <button className="delete-button">Delete</button> */}
 
-                          <button
-                            className="primary-button"
-                            onClick={() => handleCreateTender(requisition?.id)}
-                          >
-                            Create Tender
-                          </button>
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+                            <button
+                              className="primary-button"
+                              onClick={() =>
+                                handleCreateTender(requisition?.id)
+                              }
+                            >
+                              Create Tender
+                            </button>
+                          </div>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>

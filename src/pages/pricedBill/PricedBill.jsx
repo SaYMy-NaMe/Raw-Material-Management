@@ -8,6 +8,7 @@ import { statusPricedBill, userRole } from "../../utils/enums";
 
 import Spinner from "../../components/spinner/Spinner";
 import AuthContext from "../../contexts/AuthContext";
+import NoDataFound from "../../components/NoDataFound";
 
 const PricedBill = () => {
   const { user } = useContext(AuthContext);
@@ -78,79 +79,83 @@ const PricedBill = () => {
         <Spinner />
       ) : (
         <div id="seePricedBill">
-          {/* {pricedBills.length < 1 ? (
+          {pricedBills?.length < 1 ? (
             <NoDataFound />
-          ) : ( */}
-          <table>
-            <thead>
-              <tr>
-                <th>PricedBill Id</th>
-                <th>Creator</th>
-                <th>Item Id</th>
-                <th>Item Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-                <th>Status</th>
-                {(user?.role_name === userRole.USER ||
-                  user?.role_name === userRole.SUPERADMIN) && <th>Actions</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {pricedBills?.map((pricedBill) => (
-                <tr key={pricedBill?.id}>
-                  <td>{pricedBill?.id}</td>
-                  <td>{pricedBill?.user?.ex_name}</td>
-                  <td>{pricedBill?.tender?.requisition?.item?.id}</td>
-                  <td>{pricedBill?.tender?.requisition?.item?.item_name}</td>
-                  <td>{pricedBill?.tender?.requisition?.quantity}</td>
-                  <td>{pricedBill?.price}</td>
-                  <td>{pricedBill?.total_price}</td>
-                  <td>{pricedBill?.status}</td>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>PricedBill Id</th>
+                  <th>Creator</th>
+                  <th>Item Id</th>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
                   {(user?.role_name === userRole.USER ||
                     user?.role_name === userRole.SUPERADMIN) && (
-                    <td>
-                      <div className="button-container">
-                        {/* <button className="delete-button">Delete</button> */}
-                      </div>
-
-                      <div className="button-container">
-                        {user?.role_name === userRole.USER && (
-                          <button
-                            className="primary-button"
-                            disabled={
-                              pricedBill?.status === statusPricedBill.ACCEPTED
-                                ? false
-                                : true
-                            }
-                            onClick={() => handleCreateReceipt(pricedBill?.id)}
-                          >
-                            Create Receipt
-                          </button>
-                        )}
-                        {user?.role_name === userRole.SUPERADMIN && (
-                          <button
-                            className="primary-button"
-                            onClick={() =>
-                              handleAddStatusPricedBill(pricedBill?.id)
-                            }
-                            disabled={
-                              pricedBill?.status ===
-                                statusPricedBill.ACCEPTED ||
-                              pricedBill?.status === statusPricedBill.CANCEL
-                            }
-                          >
-                            Accept
-                          </button>
-                        )}
-                      </div>
-                    </td>
+                    <th>Actions</th>
                   )}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          {/* )} */}
+              </thead>
+              <tbody>
+                {pricedBills?.map((pricedBill) => (
+                  <tr key={pricedBill?.id}>
+                    <td>{pricedBill?.id}</td>
+                    <td>{pricedBill?.user?.ex_name}</td>
+                    <td>{pricedBill?.tender?.requisition?.item?.id}</td>
+                    <td>{pricedBill?.tender?.requisition?.item?.item_name}</td>
+                    <td>{pricedBill?.tender?.requisition?.quantity}</td>
+                    <td>{pricedBill?.price}</td>
+                    <td>{pricedBill?.total_price}</td>
+                    <td>{pricedBill?.status}</td>
+                    {(user?.role_name === userRole.USER ||
+                      user?.role_name === userRole.SUPERADMIN) && (
+                      <td>
+                        <div className="button-container">
+                          {/* <button className="delete-button">Delete</button> */}
+                        </div>
+
+                        <div className="button-container">
+                          {user?.role_name === userRole.USER && (
+                            <button
+                              className="primary-button"
+                              disabled={
+                                pricedBill?.status === statusPricedBill.ACCEPTED
+                                  ? false
+                                  : true
+                              }
+                              onClick={() =>
+                                handleCreateReceipt(pricedBill?.id)
+                              }
+                            >
+                              Create Receipt
+                            </button>
+                          )}
+                          {user?.role_name === userRole.SUPERADMIN && (
+                            <button
+                              className="primary-button"
+                              onClick={() =>
+                                handleAddStatusPricedBill(pricedBill?.id)
+                              }
+                              disabled={
+                                pricedBill?.status ===
+                                  statusPricedBill.ACCEPTED ||
+                                pricedBill?.status === statusPricedBill.CANCEL
+                              }
+                            >
+                              Accept
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>
