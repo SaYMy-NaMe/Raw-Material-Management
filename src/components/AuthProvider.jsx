@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
         ex_name: userData?.ex_name,
         ex_email: userData?.ex_email,
         role_name: userData?.role_name,
+        ex_contactNO: userData?.ex_contactNO,
       });
     }
   }, [user]);

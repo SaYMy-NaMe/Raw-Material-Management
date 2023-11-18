@@ -30,11 +30,11 @@ const Header = () => {
       <ul id="header-navigation">
         {userData?.token ? (
           <>
-            {userData?.role_name === userRole.SUPERADMIN && (
+            {/* {userData?.role_name === userRole.SUPERADMIN && (
               <li>
                 <NavLink to="/userList">User List</NavLink>
               </li>
-            )}
+            )} */}
             {(userData?.role_name === userRole.ADMIN ||
               userData?.role_name === userRole.STOREKEEPER ||
               userData?.role_name === userRole.SUPERADMIN) && (
@@ -74,9 +74,6 @@ const Header = () => {
             <li>
               <NavLink to="/receipt">Receipt</NavLink>
             </li>
-            <li>
-              <NavLink to="/change-password">Change Password</NavLink>
-            </li>
 
             <div className="userIconDiv">
               <img
@@ -87,8 +84,11 @@ const Header = () => {
               />
               {isProfileON && (
                 <div className="userIconDiv2">
+                  <p>{userData?.ex_name} </p>
+                  <p>{userData?.ex_email} </p>
+                  <p>{userData?.ex_contactNO} </p>
                   <li>
-                    <NavLink to="/#">Profile</NavLink>
+                    <NavLink to="/change-password">Change Password</NavLink>
                   </li>
                   <button id="logout-button" onClick={handleLogout}>
                     <LogoutIcon />

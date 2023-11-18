@@ -9,6 +9,7 @@ import Spinner from "./spinner/Spinner";
 const CreateReceipt = ({ id, setIsCreateReceipt }) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -50,12 +51,13 @@ const CreateReceipt = ({ id, setIsCreateReceipt }) => {
       <h1>Receipt</h1>
       <p>Create Receipt right here</p>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <InputField
           type="date"
           name="expected_delivery_date"
           fieldName="Expected Delivery Date"
           placeholder="Enter the probable delivery date"
+          min={today}
         />
         <button className="authButton" type="submit" disabled={isLoading}>
           Submit

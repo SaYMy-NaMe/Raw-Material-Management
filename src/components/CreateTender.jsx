@@ -9,6 +9,7 @@ import Spinner from "./spinner/Spinner";
 const CreateTender = ({ id, setIsCreateTender }) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +53,13 @@ const CreateTender = ({ id, setIsCreateTender }) => {
       <h1>Tender</h1>
       <p>Create your tender here...</p>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <InputField
           type="date"
           name="deadline"
           fieldName="Deadline"
           placeholder="Deadline"
+          min={today}
         />
         <button className="authButton" type="submit" disabled={isLoading}>
           Submit

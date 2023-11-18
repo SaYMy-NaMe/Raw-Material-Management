@@ -48,10 +48,10 @@ const Status = ({ id, setIsAddStatusPricedBill }) => {
       {isLoading && <Spinner />}
       <h1>Status of Priced Bill</h1>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <div className="inputField">
           <p>Do you want to take the deal?</p>
-          <select name="status" id="pricedBillStatus">
+          <select name="status" id="pricedBillStatus" required>
             <option value={statusPricedBill.ACCEPTED}>
               {statusPricedBill.ACCEPTED}
             </option>

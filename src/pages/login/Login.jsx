@@ -37,8 +37,6 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === "User Login Successful") {
-          toast.success("You've logged in successfully");
-
           if (data.token) {
             setStoredData("token", data.token);
             fetch(`${baseUrl}/seeProfile`, {
@@ -52,10 +50,11 @@ const Login = () => {
               .then((userData) => {
                 if (userData?.status == 200) {
                   setLoading(false);
-                  console.log(userData);
+                  toast.success("You've logged in successfully");
                   setStoredData("user", {
                     ex_name: userData?.data?.user?.ex_name,
                     ex_email: userData?.data?.user?.ex_email,
+                    ex_contactNO: userData?.data?.user?.ex_contactNO,
                     role_name: userData?.data?.user?.role_name,
                   });
 
@@ -63,6 +62,7 @@ const Login = () => {
                     token: data.token,
                     ex_name: userData?.data?.user?.ex_name,
                     ex_email: userData?.data?.user?.ex_email,
+                    ex_contactNO: userData?.data?.user?.ex_contactNO,
                     role_name: userData?.data?.user?.role_name,
                   });
                   navigate("/");

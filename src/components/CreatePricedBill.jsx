@@ -48,12 +48,13 @@ const CreatePricedBill = ({ id, setIsCreatePricedBill }) => {
       {isLoading && <Spinner />}
       <h1>Priced Bill</h1>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <InputField
           type="number"
           name="price"
           fieldName="Price"
           placeholder="Enter the Price"
+          min="0"
         />
         <button className="authButton" type="submit" disabled={isLoading}>
           Submit

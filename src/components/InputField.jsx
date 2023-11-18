@@ -1,10 +1,12 @@
 const InputField = ({
+  type,
+  name,
   fieldName,
   placeholder,
-  name,
-  type,
+  errorTxt,
   value,
   onChange,
+  ...rst
 }) => {
   return (
     <div id="inputField">
@@ -15,7 +17,10 @@ const InputField = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        required
+        {...rst}
       />
+      {errorTxt && <p style={{ color: "red" }}>{errorTxt}</p>}
     </div>
   );
 };

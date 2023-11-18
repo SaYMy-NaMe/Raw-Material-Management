@@ -46,12 +46,13 @@ const QuantityOut = ({ id, setIsQuantityOut }) => {
       {isLoading && <Spinner />}
       <h1>Quantity Out</h1>
       <form action="submit" onSubmit={handleSubmit}>
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <InputField
           type="number"
           name="quantity_out"
           fieldName="Quantity Out"
           placeholder="Quantity Out"
+          min="1"
         />
         <button className="authButton" type="submit" disabled={isLoading}>
           Submit

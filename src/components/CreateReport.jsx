@@ -9,6 +9,7 @@ import Spinner from "./spinner/Spinner";
 const CreateReport = ({ id, setIsCreateReport }) => {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -51,7 +52,7 @@ const CreateReport = ({ id, setIsCreateReport }) => {
       {isLoading && <Spinner />}
       <h1>Create Report</h1>
       <form>
-        <InputField type="text" fieldName="Item Id" value={id} />
+        <InputField type="text" fieldName="Item Id" value={id} disabled />
         <InputField
           type="date"
           name="start_date"
@@ -63,6 +64,7 @@ const CreateReport = ({ id, setIsCreateReport }) => {
           name="end_date"
           fieldName="End Date"
           placeholder="End Date"
+          max={today}
         />
         <button className="authButton" type="submit" disabled={isLoading}>
           Submit

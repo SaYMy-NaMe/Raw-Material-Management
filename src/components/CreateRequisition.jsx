@@ -53,7 +53,7 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
       <h1>Requisition</h1>
       <p>Create your Requisition right here</p>
       <form action="submit">
-        <InputField type="text" fieldName="ID" value={id} />
+        <InputField type="text" fieldName="ID" value={id} disabled />
         <InputField
           type="text"
           name="project_name"
@@ -71,6 +71,7 @@ const CreateRequisition = ({ id, setIsCreateRequisition }) => {
           name="quantity"
           fieldName="Quantity"
           placeholder="Quantity"
+          min="1"
         />
         <InputField
           type="text"
